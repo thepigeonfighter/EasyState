@@ -7,7 +7,7 @@
 
 </head>
 <body>
-<p><img class="title-image" src="images/easystateicon.png" alt="Easy State Icon"></p>
+<p><img class="title-image" src="images/EasyStateIcon.png" alt="Easy State Icon"></p>
 <h1 id="welcome-to-easy-state">Welcome to Easy State</h1>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -100,7 +100,7 @@ A <code>State</code> must have the following :</p>
 <h3 id="11-easy-state-editor">1.1 Easy State Editor</h3>
 <hr>
 <p>The window can be found under the 'Window/EasyState/Editor' tab at the top of Unity.The window is a draggable/dockable and behaves in the same way as other Unity windows like 'Scene' and 'Game' work.
-<img src="startupwindow.png" alt="Start Up Window">
+<img src="images/StartUpWindow.png" alt="Start Up Window">
 <em>TIPS</em></p>
 <ul>
 <li>
@@ -120,10 +120,10 @@ A <code>State</code> must have the following :</p>
 <p>Note : In order to add nodes to a behavior a context must be selected.</p>
 </blockquote>
 <p>All nodes share the following functionality:<br>
-<img src="images/nodediagram.png" alt="Node Diagram"></p>
+<img src="images/NodeDiagram.png" alt="Node Diagram"></p>
 <h4 id="entry-node">Entry Node</h4>
 <hr>
-<p><img src="images/entrynode_alone.png" alt="Entry Node"><br>
+<p><img src="images/entryNode_alone.png" alt="Entry Node"><br>
 This node only has one property which is to set its name. By convention the name is set to &quot;Entry&quot;, but it can be anything you want. Any leaf nodes will transition back to this state after execution. This will also always be the first state that gets executed on a given behavior and therefore cannot be deleted.</p>
 <h4 id="state-nodes">State Nodes</h4>
 <hr>
@@ -171,7 +171,7 @@ This is the simplest of all nodes. It has two lines where black represents sourc
 <hr>
 <h3 id="12-context-wizard">1.2 Context Wizard</h3>
 <hr>
-<p><img src="images/contextwizard.png" alt="Context Wizard Editor"></p>
+<p><img src="images/contextWizard.png" alt="Context Wizard Editor"></p>
 <p>The Context Wizard is used to make the Actions, Conditions, and Contexts. Actions and Conditions  require a Context. A Context holds the data that Conditions need to evaluate and the data Actions need to 'act' on.</p>
 <h4 id="options">Options</h4>
 <p>There are a few configurable options in the wizard that mostly have to do with where the files that are being created are being saved. The default folder structure is explained in the <a href="#22-EasyState-Database">EasyState Database Section</a>. The only other option lets you decide if you want to use default namespaces or not. By default each file that you create is associated with a context and it uses a unique namespace to encapsulate classes that belong to that namespace. By default the name of the namespace is &quot;(ContextName)FSM&quot;.</p>
@@ -197,7 +197,7 @@ Each time you create a context EasyState generates six files that help keep thin
 <hr>
 <h3 id="state-machine">State Machine</h3>
 <hr>
-<p><img src="images/samplestatemachine.png" alt="Sample State Machine"></p>
+<p><img src="images/SampleStateMachine.png" alt="Sample State Machine"></p>
 <p>This is an example state machine that was created when you completed the first tutorial. It is linked with a context named &quot;FirstContext&quot;. For each context that a user creates a custom state machine type is created. This is the component that you place on the <code>GameObject</code> you are trying to control. This component acts as a container for all machines you wish to have running on the object it is attached to. Although a <code>StateMachine</code> can have multiple machines running at the same time it was designed so that each machine is referencing the same <code>Context</code>. If that is not the behavior you desire you can add a second <code>StateMachine</code> component which will reference a unique context. By default the <code>StateMachine</code> will start updating all the machines it is running on  Awake, but if you wish to start them manually you can un-tick that option. Also by default we use instance data of the context instead of the original source. When this box is checked it will clone the context it was given and use the clone for the duration of its life cycle. If this is not the desired behavior just un-check this option. Clicking open context will simply display an inspector for the context that is tied to the state machine. Giving an easy way to jump between machine and context and alter variables on the fly.</p>
 <p>Each custom <code>StateMachine</code> has three methods of note:</p>
 <ul>
@@ -277,7 +277,7 @@ This stops the updater.</li>
 <blockquote>
 <p>Deleting the root database folder is an effective way to reset your database.</p>
 </blockquote>
-<p><img src="images/folderstructure.png" alt="Folder Tree"></p>
+<p><img src="images/folderStructure.png" alt="Folder Tree"></p>
 <p>When your project compiles EasyState creates a variety of folders to store generated scripts and assets. The main folder has four sub-folders within it. They are as follows:</p>
 <ul>
 <li>
@@ -306,16 +306,16 @@ This folder holds all the necessary files for keeping track of the editors state
 <ol>
 <li>
 <p>Open Context Wizard.
-<img src="images/opencontextwizard.png" alt="Open Context Wizard"></p>
+<img src="images/openContextWizard.png" alt="Open Context Wizard"></p>
 </li>
 <li>
 <p>Create a context named &quot;FirstContext&quot;.<br>
-<img src="images/firstcontextcreation.png" alt="Create First Context"></p>
+<img src="images/firstContextCreation.png" alt="Create First Context"></p>
 </li>
 <li>
 <p>Set Action context to 'FirstContext' and create Action Named &quot;HelloAction&quot;. Injecting the following logic :<br>
 <code>Debug.Log(&quot;Hello!!&quot;);</code><br>
-<img src="images/helloactioncreation.png" alt="Create Hello Action"></p>
+<img src="images/helloActionCreation.png" alt="Create Hello Action"></p>
 </li>
 <li>
 <p>Set Action context to 'FirstContext' and create an 'Action' named &quot;GoodbyeAction&quot;. Injecting the following logic :<br>
@@ -325,15 +325,15 @@ This folder holds all the necessary files for keeping track of the editors state
 <li>
 <p>Set Condition context to 'FirstContext' and create a 'Condition' named &quot;RandomChoice&quot;.Injecting the following logic :<br>
 <code>return Random.Range(0.0f,1.0f)&gt; 0.5f;</code><br>
-<img src="images/randomchoicecreation.png" alt="Create Random Choice"></p>
+<img src="images/randomChoiceCreation.png" alt="Create Random Choice"></p>
 </li>
 <li>
 <p>Open the Easy State Editor.<br>
-<img src="images/openwindow.png" alt="Open Editor Window"></p>
+<img src="images/OpenWindow.png" alt="Open Editor Window"></p>
 </li>
 <li>
 <p>Name Behavior &quot;First Behavior&quot; and set context to 'FirstContext'.<br>
-<img src="images/firstbehaviorname.png" alt="Name Behavior"></p>
+<img src="images/firstBehaviorName.png" alt="Name Behavior"></p>
 </li>
 <li>
 <p>Add the first node.<br>
@@ -378,7 +378,7 @@ This folder holds all the necessary files for keeping track of the editors state
 </li>
 <li>
 <p>Expand <code>Element0</code> under the machines foldout. Set the <code>Behavior</code> property of that element to the behavior we just created.
-<img src="images/firststatemachine.png" alt="First State Machine Component"></p>
+<img src="images/firstStateMachine.png" alt="First State Machine Component"></p>
 </li>
 <li>
 <p>Click 'Play' in Unity.You should start receiving alternating messages in the console.
@@ -421,26 +421,26 @@ This context also extends the Animal Context and adds several properties like pl
 </ul>
 <p><strong>Locomotion</strong><br>
 There will only be one behavior that is based on the Animal Context. It will be called &quot;Locomotion&quot; that both predator and prey will utilize to move around. It is very simple it simply checks to see if it has arrived at it's current target. If not it moves closer to it by a speed that has been given to the context.<br>
-<img src="images/locomotionbehavior.png" alt="Locomotion Behavior"></p>
+<img src="images/LocomotionBehavior.png" alt="Locomotion Behavior"></p>
 <p><strong>Prey Target Scanner</strong><br>
 The Prey Context will have two behaviors that depend on it's information. The first one is called PreyTargetScanner which is the most simple behavior possible. It is separated from other behaviors to demonstrate the fact that it is possible to run processes at different rates on the same gameobject. Therefore when doing an expensive action like scanning your environment you can set this to happen at a lower interval than some more necessary task.
-<img src="images/preytargetscanner.png" alt="Prey Target Scanner"></p>
+<img src="images/PreyTargetScanner.png" alt="Prey Target Scanner"></p>
 <p><strong>Prey Target Updater</strong><br>
 The second behavior that is tied to the Prey Context is called PreyTargetUpdater. It's job is to make the prey wander around the map unless the player gets too close at which point it should flee away from the player.
-<img src="images/preytargetupdater.png" alt="Prey Target Updater"></p>
+<img src="images/PreyTargetUpdater.png" alt="Prey Target Updater"></p>
 <p><strong>Hunter Scanner</strong><br>
 The PlayerHunterContext will also have two behaviors tied to it. The first one is called Hunter Scanner which does essentially the same thing as the Prey Target Updater but is used a little differently to maintain the last seen property that the hunter holds. This behavior purposely uses two transitions from a single state to demonstrate using priority. If you examine this double transition you will be able to see that the most important factor in the transition is if the hunter can currently see the player. Using the given priorities the following behavior emerges. If the hunter can see the player no matter what it will always update the current target of the hunter to be the player. If the player isn't seen but has been found it will skip to idle. If the player isn't seen and hasn't been found then it will scan the environment for the player.
-<img src="images/hunterscanner.png" alt="Hunter Scanner"></p>
+<img src="images/HunterScanner.png" alt="Hunter Scanner"></p>
 <p><strong>Hunter Chase</strong><br>
 This behavior is responsible for driving the predator when the player has been spotted. It will go to the last place the player has been seen. If it looses sight of the player it will keep moving towards the last place it saw the player until the time since the player was last seen is larger than the boredTimeout value. At which point it will return to the place it was spawned.
-<img src="images/hunterchase.png" alt="Hunter Chase"></p>
+<img src="images/HunterChase.png" alt="Hunter Chase"></p>
 <p>These five behaviors are all you need to achieve the desired AI behavior.</p>
 <h4 id="bot-eater-steps">Bot-Eater Steps</h4>
 <ol>
 <li>Import EasyState.</li>
 <li>Navigate to the folder <code>Assets/EasyState/Demos/</code>.</li>
 <li>Double click on the Bot-Eater Unity Package and import all of it.</li>
-<li>Open the EasyState Editor Window.  <img src="images/openwindow.png" alt="Open Editor Window"></li>
+<li>Open the EasyState Editor Window.  <img src="images/OpenWindow.png" alt="Open Editor Window"></li>
 <li>Name the behavior &quot;Locomotion&quot; and choose &quot;Animal&quot; as the context.</li>
 <li>Then Create three nodes named &quot;Entry&quot;,&quot;Idle&quot;,&quot;Move&quot;.</li>
 <li>Set both &quot;Idle&quot; and &quot;Move&quot; states as leaf states.</li>
