@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Documentation.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h1 id="welcome-to-easy-state">Welcome to Easy State</h1>
+<p><img src="easystateicon.png" alt="Easy State Icon"></p>
+<hr>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#welcome-to-easy-state">Welcome to Easy State</a>
+<ul>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#asset-overview">Asset Overview</a></li>
+<li><a href="#1editors">1.Editors</a>
+<ul>
+<li><a href="#11-easy-state-editor">1.1 Easy State Editor</a>
+<ul>
+<li><a href="#getting-around-the-editor">Getting Around the Editor</a></li>
+<li><a href="#entry-node">Entry Node</a></li>
+<li><a href="#state-nodes">State Nodes</a></li>
+<li><a href="#decision-nodes">Decision Nodes</a></li>
+<li><a href="#unconditional-nodes">Unconditional Nodes</a></li>
+</ul>
+</li>
+<li><a href="#12-context-wizard">1.2 Context Wizard</a>
+<ul>
+<li><a href="#options">Options</a></li>
+<li><a href="#context-creator">Context Creator</a></li>
+<li><a href="#action--condition-creator">Action &amp; Condition Creator</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-system-design">2 System Design</a>
+<ul>
+<li><a href="#state-machine">State Machine</a></li>
+<li><a href="#machine">Machine</a></li>
+<li><a href="#state">State</a></li>
+<li><a href="#transitions">Transitions</a></li>
+<li><a href="#actions">Actions</a></li>
+<li><a href="#conditions">Conditions</a></li>
+<li><a href="#context">Context</a></li>
+<li><a href="#machineupdater">MachineUpdater</a></li>
+<li><a href="#easystate-database">EasyState Database</a></li>
+</ul>
+</li>
+<li><a href="#3-tutorials">3 Tutorials</a>
+<ul>
+<li><a href="#my-first-behavior">My First Behavior</a>
+<ul>
+<li><a href="#steps">Steps</a></li>
+</ul>
+</li>
+<li><a href="#bot-eater">Bot Eater</a>
+<ul>
+<li><a href="#project-overview">Project Overview</a></li>
+<li><a href="#bot-eater-behaviors">Bot-Eater Behaviors</a></li>
+<li><a href="#bot-eater-steps">Bot-Eater Steps</a></li>
+<li><a href="#troubleshooting-and-tips">Troubleshooting and Tips</a></li>
+<li><a href="#bot-eater-included-code">Bot-Eater Included Code</a>
+<ul>
+<li><a href="#general-scripts">General Scripts</a></li>
+<li><a href="#bot-eater-actions">Bot-Eater Actions</a></li>
+<li><a href="#bot-eater-conditions">Bot-Eater Conditions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="introduction">Introduction</h2>
+<p>Easy State is a simple and extensible visual state machine editor. It provides the framework to quickly sketch out complicated behaviors. If you want to learn about the system from the ground up read on! But if you want to jump right in and get your hands dirty I recommend jumping straight to the <a href="#3-tutorials">Tutorials</a> section.</p>
+<h2 id="asset-overview">Asset Overview</h2>
+<p>One of the only <code>MonoBehaviors</code> in this asset is the state machine component you add onto the object you are hoping to control. That state machine object acts as the updater to the state machine. It knows nothing about the inner workings of the behavior its only job is to connect any necessary dependencies the context might have and then update the machine at a user defined interval. It can have one or more <code>Behaviors</code> under its control at once. In its simplest terms a <code>Behavior</code> is just a group of <code>States</code>.<br>
+A <code>State</code> must have the following :</p>
+<ul>
+<li>At least one boolean transition</li>
+<li>An address of where to go to if the transition evaluates to true</li>
+<li>An address of where to go to if the transition evaluates as false</li>
+</ul>
+<p>It may also contain one or more actions that get executed upon entering the state. The state is explicitly dependent on the context it is given.</p>
+<p>The <code>Context</code> is the anchor for the whole system. The context should be used to keep track of all the important information that the state machine system needs to know to operate. The system has been designed with a context driven approach. Everything else in the system relies on the validity of the context. It acts as the eyes and ears of the system.</p>
+<p><code>Actions</code> are the doers in the system. They act on the information that is stored in the given context. They should be the only part of the system that is actively updating data.</p>
+<p><code>Conditions</code> should function as validators. They act as forks in the road. As such they should only read context data and not alter it. Doing this will ensure a separation of concerns and make debugging a little more simple.</p>
+<p>Check out <a href="#2-System-Design">System Design</a> for more info on each of these components.</p>
+<hr>
+<h2 id="1editors">1.Editors</h2>
+<hr>
+<p>There are two main editor tools when using EasyState. The main Editor is where you design your behaviors using the visual node editor. Then there is the Context Wizard which is used to create Contexts, Actions, and Conditions. Both of these tools were designed to be as simple and efficient as possible without sacrificing flexibility.</p>
+<h3 id="11-easy-state-editor">1.1 Easy State Editor</h3>
+<hr>
+<p>The window can be found under the 'Window/EasyState/Editor' tab at the top of Unity.The window is a draggable/dockable and behaves in the same way as other Unity windows like 'Scene' and 'Game' work.
+<img src="startupwindow.png" alt="Start Up Window">
+<em>TIPS</em></p>
+<ul>
+<li>
+<p>Make sure each behavior has a unique name. As naming a behavior the same name as an old behavior will overwrite the old behavior.</p>
+</li>
+<li>
+<p>A State Context is required before you can add any nodes to a behavior. The context is used like a filter to help ensure you aren't using conditions or actions that were meant for different contexts.</p>
+</li>
+<li>
+<p>If you are wanting to have a slightly different version of an existing behavior. Load the existing behavior make your modifications and then change the name to something unique. Doing so will create a new behavior.</p>
+</li>
+</ul>
+<h4 id="getting-around-the-editor">Getting Around the Editor</h4>
+<hr>
+<p>This editor allows the user to pan and zoom. To pan left click on the background and drag. Left click to select a node and then left click and drag to move the node around the editor window. You can zoom the editor in and out by using either the mouse scroll wheel or the '+' and '-' keys on your num-pad. To add nodes to the editor right click on the background. Doing so will open a context menu. Select 'Add Node' and it will create a node where your mouse is located.</p>
+<blockquote>
+<p>Note : In order to add nodes to a behavior a context must be selected.</p>
+</blockquote>
+<p>All nodes share the following functionality:<br>
+<img src="nodediagram.png" alt="Node Diagram"></p>
+<h4 id="entry-node">Entry Node</h4>
+<hr>
+<p><img src="entrynode_alone.png" alt="Entry Node"><br>
+This node only has one property which is to set its name. By convention the name is set to &quot;Entry&quot;, but it can be anything you want. Any leaf nodes will transition back to this state after execution. This will also always be the first state that gets executed on a given behavior and therefore cannot be deleted.</p>
+<h4 id="state-nodes">State Nodes</h4>
+<hr>
+<p><img src="statenode.png" alt="State Node"></p>
+<ul>
+<li>
+<p><strong>State Name</strong>
+Nothing special here just helps keep track of which state is which but is not used as an identifier so multiple states can be named the same thing although, that is not advised.</p>
+</li>
+<li>
+<p><strong>Add New Action Button</strong>
+Just click it and use Unity's object picker to select the action you want executed when this state becomes active.</p>
+</li>
+<li>
+<p><strong>Leaf State</strong>
+If this is set to true there will be an implicit unconditional transition back to the entry state. The same functionality could be achieved by marking the state as a cycle state then creating an unconditional transition back to the entry node but marking the state as a leaf state makes for a cleaner editor.If set to true it will also set the cycle state to true. A state can be a cycle state and not a leaf state but cannot be a leaf state without being a cycle state. Also note that if a state is a leaf state it cant have any other transitions added to it.</p>
+</li>
+<li>
+<p><strong>Cycle State</strong>
+If this is set to true it will signal the StateMachine to yield a frame after executing this frame. This might be useful when the actions on a state are expensive or you would just like to move forward a frame before moving to the next state.</p>
+</li>
+</ul>
+<h4 id="decision-nodes">Decision Nodes</h4>
+<hr>
+<p><img src="decisionnode.png" alt="Decision Node"><br>
+This is the standard transition node. The black line is always tied to the source state. The green line is tied to the state that will be chosen if the condition evaluates as true. The red line is tied to the state that will be chosen if the condition evaluates as false.</p>
+<ul>
+<li>
+<p><strong>Condition</strong>
+Use Unity's object picker to selected the condition you want evaluated.</p>
+</li>
+<li>
+<p><strong>True Priority</strong>
+If the condition returns true this choice will be given this priority. In the case of multiple transitions evaluating as true the transition with the highest priority(lowest number) will be chosen.</p>
+</li>
+<li>
+<p><strong>False Priority</strong>
+If the condition returns false this choice will be given this priority. In the case of multiple transitions evaluating as false the transition with the highest priority(lowest number) will be chosen.</p>
+</li>
+</ul>
+<h4 id="unconditional-nodes">Unconditional Nodes</h4>
+<hr>
+<p><img src="unconditionalnode.png" alt="Unconditional Node"><br>
+This is the simplest of all nodes. It has two lines where black represents source state and green represents destination state. Using this node always chooses the connected destination state as the next state. If you use this transition you are not allowed to have any other transitions from that source state.</p>
+<hr>
+<h3 id="12-context-wizard">1.2 Context Wizard</h3>
+<hr>
+<p><img src="contextwizard.png" alt="Context Wizard Editor"></p>
+<p>The Context Wizard is used to make the Actions, Conditions, and Contexts. Actions and Conditions  require a Context. A Context holds the data that Conditions need to evaluate and the data Actions need to 'act' on.</p>
+<h4 id="options">Options</h4>
+<p>There are a few configurable options in the wizard that mostly have to do with where the files that are being created are being saved. The default folder structure is explained in the <a href="#22-EasyState-Database">EasyState Database Section</a>. The only other option lets you decide if you want to use default namespaces or not. By default each file that you create is associated with a context and it uses a unique namespace to encapsulate classes that belong to that namespace. By default the name of the namespace is &quot;(ContextName)FSM&quot;.</p>
+<blockquote>
+<p>Tip Pay attention to the save folder path to find out where the generated scripts and assets are being stored.</p>
+</blockquote>
+<h4 id="context-creator">Context Creator</h4>
+<p>This is the tab that should be used to create a context. You can name your context whatever you like. By convention the name should end in 'Context' but that is not a requirement. You can click the &quot;Add Property&quot; if you know that your particular context is going to require certain properties. You will need to provide the <code>Type</code> (i.e. int,string, etc) and the property name. If you know that a property in your context is going to need to depend on a value given to it by the associated state machine check the &quot;Tie to property&quot; box. For example lets say that you wanted to store a variable of type <code>Transform</code> named &quot;EnemyTransform&quot;. Well if you enabled the &quot;Tie to property&quot; option it will create a public property name &quot;EnemyTransform&quot;. It will then set the property to be equal to the &quot;EnemyTransform&quot; variable stored in the context. Therefore giving you a way to set context properties at runtime or in the inspector. Of course more values can be added to the context after creation this is merely meant to be a time saving option. When you have named your context and added the desired properties you might notice a info box that tells you what files you will create when you create a new context.<br>
+<img src="contextCreator.png" alt="Info Box"><br>
+Each time you create a context EasyState generates six files that help keep things statically typed. The following types are created :</p>
+<ul>
+<li>Custom Context script and asset</li>
+<li>Custom Action type</li>
+<li>Custom Condition type</li>
+<li>Custom Behavior type</li>
+<li>Custom State Machine</li>
+</ul>
+<p>Why are all these files created? As previously mentioned actions and conditions are explicitly dependant on the contexts that they are given. Therefore to keep things as type specific as possible these companion types are created. It also has the benefit of creating a safer experience when using the state machine editor because you can filter actions and conditions by what context they depend on.</p>
+<h4 id="action-condition-creator">Action &amp; Condition Creator</h4>
+<p>These two sections function almost identically to each other. All you need to do is select the Context you want to bind the condition or action to and then name it something sensible. Click the &quot;Create&quot; button and it will generate an action or condition with the correct custom type that is linked to the selected context. You can also inject logic in the foldout by that name. This works best with very small amounts of logic because there is no editor support so long lines of code can be hard to read and are prone to error. If no logic is injected the method will throw a <code>NotImplementedException</code>.</p>
+<hr>
+<h2 id="2-system-design">2 System Design</h2>
+<hr>
+<h3 id="state-machine">State Machine</h3>
+<hr>
+<p><img src="samplestatemachine.png" alt="Sample State Machine"></p>
+<p>This is an example state machine that was created when you completed the first tutorial. It is linked with a context named &quot;FirstContext&quot;. For each context that a user creates a custom state machine type is created. This is the component that you place on the <code>GameObject</code> you are trying to control. This component acts as a container for all machines you wish to have running on the object it is attached to. Although a <code>StateMachine</code> can have multiple machines running at the same time it was designed so that each machine is referencing the same <code>Context</code>. If that is not the behavior you desire you can add a second <code>StateMachine</code> component which will reference a unique context. By default the <code>StateMachine</code> will start updating all the machines it is running on  Awake, but if you wish to start them manually you can un-tick that option. Also by default we use instance data of the context instead of the original source. When this box is checked it will clone the context it was given and use the clone for the duration of its life cycle. If this is not the desired behavior just un-check this option. Clicking open context will simply display an inspector for the context that is tied to the state machine. Giving an easy way to jump between machine and context and alter variables on the fly.</p>
+<p>Each custom <code>StateMachine</code> has three methods of note:</p>
+<ul>
+<li><em>GetContext()</em><br>
+this returns the instance of the context to whatever was asking.</li>
+<li><em>Pre-Initialize()</em><br>
+this gets called once before the state machines are initialized. Good place to set up any dependencies that the context has.(i.e if the machine needs a reference to its own gameObject or something similar)</li>
+<li><em>Post-Initialize()</em><br>
+this gets called after all machines are initialized and if <code>StartOnAwake</code> is true this will get called after all machines have complete their first update loop.</li>
+<li><em>OnStateUpdated(State state)</em>
+this gets called every time the state changes of a machine changes.</li>
+</ul>
+<h3 id="machine">Machine</h3>
+<p>A Machine is comprised of the following properties:</p>
+<ul>
+<li>Name<br>
+This is used so you can stop/start machines by name if desired.</li>
+<li>Behavior<br>
+The behavior that will be executed by the machine.</li>
+<li>Updater<br>
+This is a <code>MachineUpdater</code> which is fully explained <a href="###MachineUpdater">here</a></li>
+</ul>
+<h3 id="state">State</h3>
+<hr>
+<p>A state is defined by having zero or more actions and at least one transition. But can have many transitions. A state only has one public method <code>UpdateState(StateContext context)</code>. It will iterate through all of its actions giving them a reference to the context object and allowing them to act. Only after all the actions have been executed does it then evaluate the transitions. It iterates through all the transitions and picks the highest rank result and returns that state back to the controller object. A state has a property named <code>isCycleState</code>. This is used to tell the state controller that this state should be the last state to execute on the given frame.</p>
+<h3 id="transitions">Transitions</h3>
+<hr>
+<p>A transition is a simple object that has the following properties:</p>
+<ul>
+<li>
+<p><code>Condition</code></p>
+</li>
+<li>
+<p>A <code>State</code> to go to if that condition is false</p>
+</li>
+<li>
+<p>A  <code>State</code> to go to if that condition is true.</p>
+<p>It also has a ranking to rank how important the transition is. This allows for states to have multiple transitions. Say for example, if your AI is tired you want it to rest and if its being chased you would want it to run away. Obviously you would want your AI to run away even if it was tired. One way to choose between those two different transitions would be to rank the running away transition as having a higher priority than the resting transition. Also note the lower numbers indicate higher importance. So the transition with the lowest number (highest rank) would be chosen first.</p>
+</li>
+</ul>
+<h3 id="actions">Actions</h3>
+<hr>
+<p>All actions are derived from the base abstract class <code>ActionBase</code>, which inherits from Unity's <code>ScriptableObject</code>. Doing so allows us to create pluggable actions that can be reused in different behaviors.</p>
+<p><code>ActionBase</code> only defines one void method which is <code>Act(Context context)</code>. This gets called when the state connected to this action is attached to gets called. It is wise to try and make these actions as independent entities that only get information from the context object. It is also highly recommended that you do not store variables inside your actions. Actions should be completely stateless on their own and only act on the state that is given them by the <code>Context</code> object. If you do store variables in your actions since actions inherit from <code>ScriptableObject</code> you might be mutating data that is necessary somewhere else.</p>
+<h3 id="conditions">Conditions</h3>
+<hr>
+<p>All conditions are derived from the base abstract class <code>Condition</code> which inherits from Unit's <code>ScriptableObject</code>. Doing so allows us to create pluggable conditions that can be used in different behaviors.</p>
+<p><code>Condition</code> only defines one method which returns a boolean result named <code>Decide(Context)</code>. All decisions should use the context object to return true or false. Again you should not store any variables in a condition, as this will introduce bugs. Instead store the variables that you need in the <code>Context</code> object.</p>
+<h3 id="context">Context</h3>
+<hr>
+<p>This is more of an idea than anything. Out of the box this is an empty class aside from a couple built-in methods. It is supposed to be up to the developer to populate this class with all the information that states require to operate(i.e. playerTransform, enemyTransform etc.). A tip when using contexts is to keep stats as a separate idea from contexts. Odds are you will want to duplicate the stats and not the contexts. Duplicating contexts will cause you to run into all sorts of headaches.</p>
+<h3 id="machineupdater">MachineUpdater</h3>
+<hr>
+<p>This is a simple component that works in conjunction with the StateController object. It's only job is to make the StateController update at a user defined interval. It has the following settings:</p>
+<ul>
+<li>Every Frame<br>
+This gets updated during the Update method and is the default behavior.</li>
+<li>Fixed Update<br>
+This gets called during the by the FixedUpdate method is useful physics interactions.</li>
+<li>Custom Rate<br>
+This start a repeating Co-Routine that will repeat at the given rate. Is useful for things that do not need to be updated often.</li>
+<li>None<br>
+This never tells the StateController to update. This is meant for a more event driven approach.</li>
+</ul>
+<p>The <code>MachineUpdater</code> has the following important methods:</p>
+<ul>
+<li>UpdateMachine()<br>
+This will update the machine once.</li>
+<li>StartUpdater()<br>
+This will start the updater and will run until the machine has been stopped.</li>
+<li>StopUpdater()<br>
+This stops the updater.</li>
+</ul>
+<h3 id="easystate-database">EasyState Database</h3>
+<hr>
+<p>While using the Easy State you will generate an assortment of scripts and assets. By default they will all be stored in a folder that will be named EasyState Database. While using EasyState you will be unable to get rid of this folder.</p>
+<blockquote>
+<p>Deleting the root database folder is an effective way to reset your database.</p>
+</blockquote>
+<p><img src="folderstructure.png" alt="Folder Tree"></p>
+<p>When your project compiles EasyState creates a variety of folders to store generated scripts and assets. The main folder has four sub-folders within it. They are as follows:</p>
+<ul>
+<li>
+<p><em>Behaviors</em><br>
+This stores all saved behaviors regardless of context.</p>
+</li>
+<li>
+<p><em>Generated Assets</em><br>
+This is where all scriptable objects that are created in relation to the actions and conditions that you create. This folder also has three sub-folders within itself, but the divisions are self evident.</p>
+</li>
+<li>
+<p><em>Generated Types</em><br>
+This is where all the generated scripts are stored. This is slightly different than the 'Generated Assets' folder because for each unique context that you create it will create a sub-folder by that same name and store the related 'Actions' and 'Conditions' with in that sub-folder. In the example image we had created a Context named 'FirstContext'. Therefore, sub-folder by that name was created within the 'Generated Types' folder.</p>
+</li>
+<li>
+<p><em>Settings</em><br>
+This folder holds all the necessary files for keeping track of the editors states and user settings. Therefore, this folder can largely be ignored by the user.</p>
+</li>
+</ul>
+<h2 id="3-tutorials">3 Tutorials</h2>
+<hr>
+<h3 id="my-first-behavior">My First Behavior</h3>
+<p>(Time to complete : 5 minutes)</p>
+<p>This tutorial will show you the ropes of the editor. By the end of it you will have created your first behavior which will log alternating messages to the console.</p>
+<h4 id="steps">Steps</h4>
+<ol>
+<li>
+<p>Open Context Wizard.
+<img src="opencontextwizard.png" alt="Open Context Wizard"></p>
+</li>
+<li>
+<p>Create a context named &quot;FirstContext&quot;.<br>
+<img src="firstcontextcreation.png" alt="Create First Context"></p>
+</li>
+<li>
+<p>Set Action context to 'FirstContext' and create Action Named &quot;HelloAction&quot;. Injecting the following logic :<br>
+<code>Debug.Log(&quot;Hello!!&quot;);</code><br>
+<img src="helloactioncreation.png" alt="Create Hello Action"></p>
+</li>
+<li>
+<p>Set Action context to 'FirstContext' and create an 'Action' named &quot;GoodbyeAction&quot;. Injecting the following logic :<br>
+<code>Debug.Log(&quot;Goodbye!!&quot;);</code><br>
+<img src="goodbyeactioncreation.png" alt="Create Goodbye Action"></p>
+</li>
+<li>
+<p>Set Condition context to 'FirstContext' and create a 'Condition' named &quot;RandomChoice&quot;.Injecting the following logic :<br>
+<code>return Random.Range(0.0f,1.0f)&gt; 0.5f;</code><br>
+<img src="randomchoicecreation.png" alt="Create Random Choice"></p>
+</li>
+<li>
+<p>Open the Easy State Editor.<br>
+<img src="openwindow.png" alt="Open Editor Window"></p>
+</li>
+<li>
+<p>Name Behavior &quot;First Behavior&quot; and set context to 'FirstContext'.<br>
+<img src="firstbehaviorname.png" alt="Name Behavior"></p>
+</li>
+<li>
+<p>Add the first node.<br>
+<img src="addentry.png" alt="Entry Node"></p>
+</li>
+<li>
+<p>Add second node and name it &quot;Hello&quot;.</p>
+</li>
+<li>
+<p>Add third node and name it &quot;Goodbye&quot;.
+<img src="addtwonodes.png" alt="Three nodes in editor"></p>
+</li>
+<li>
+<p>Select Entry node and right click on it. Select make transition and then click on the Hello World State node.
+<img src="adddecision.png" alt="Three nodes + decision node in editor"></p>
+</li>
+<li>
+<p>Select the decision. Right click and set false state to the Goodbye World State node.</p>
+</li>
+<li>
+<p>Set the condition of the decision node to the &quot;Random Choice&quot; condition.
+<img src="connectdecision.png" alt="node editor"></p>
+</li>
+<li>
+<p>Set the &quot;Leaf State&quot; checkbox to true on both Hello World and Goodbye World States.</p>
+</li>
+<li>
+<p>Click the &quot;Add New Action&quot; button on the Hello State and pick the &quot;HelloAction&quot; as the action.</p>
+</li>
+<li>
+<p>Click the &quot;Add New Action&quot; button on the Goodbye State and pick the &quot;GoodbyeAction&quot; as the action.
+<img src="myfirstbehavior.png" alt="completed my first behavior"></p>
+</li>
+<li>
+<p>Click the &quot;Save&quot; button under the menu foldout. You should see the message &quot;Behavior Saved.&quot;.</p>
+</li>
+<li>
+<p>Next, add an empty <code>GameObject</code> to your scene in unity.On that <code>GameObject</code> add a <code>FirstStateMachine</code> component.</p>
+</li>
+<li>
+<p>Set the <code>Machines</code> size to one.</p>
+</li>
+<li>
+<p>Expand <code>Element0</code> under the machines foldout. Set the <code>Behavior</code> property of that element to the behavior we just created.
+<img src="firststatemachine.png" alt="First State Machine Component"></p>
+</li>
+<li>
+<p>Click 'Play' in Unity.You should start receiving alternating messages in the console.
+<img src="firstbehavior_running.png" alt="First behavior running in Unity"></p>
+</li>
+</ol>
+<hr>
+<h3 id="bot-eater">Bot Eater</h3>
+<p>(Time to complete 15 - 20 minutes)</p>
+<h4 id="project-overview">Project Overview</h4>
+<p>This will be a slightly more ambitious project than that last tutorial. Since this project aims to be slightly more complicated it is recommended that you complete the first tutorial to get used to using the interface. The goal of this project is to make a simple game where a player can move and fly around like a bird above the ground.
+The game will contain two types of AI. The first AI will act as prey for the player. The other will try to eat the player. The player must avoid the AI that is hunting him and eat the AI that is trying to avoid him.</p>
+<p><strong>Desired Prey AI Attributes:</strong></p>
+<ul>
+<li>If safe the prey should wander around the map.</li>
+<li>If the prey can see the player it should then run.</li>
+</ul>
+<p><strong>Desired PlayerHunter AI Attributes:</strong></p>
+<ul>
+<li>If the hunter can not see the player it should remain motionless.</li>
+<li>If the hunter sees the player it should chase after the player.</li>
+<li>If the hunter has lost sight of the player for more than a given time it should return to its original position.</li>
+</ul>
+<p>For added simplicity the code has been written for you. To see a detailed explanation of the included code look <a href="#bot-eater-included-code">here</a>. The code that has been included is not production ready it is intended to display potential uses of the asset. This tutorial will explain how to create five behaviors that will produce the above described AI. You can either use the following images and descriptions as a means to building the behaviors or follow the step by step directions that will follow the descriptions.</p>
+<h4 id="bot-eater-behaviors">Bot-Eater Behaviors</h4>
+<p>There will be three different contexts created that we will use to compose the entire AI.</p>
+<ul>
+<li>
+<p>Animal Context
+This context is a base context that both of the other contexts will rely on. It contains information that would be useful to both predator and prey. (i.e. references to own transform and some constraints like speed, current speed, etc).</p>
+</li>
+<li>
+<p>Prey Context
+This context inherits from AnimalContext and adds some prey specific information.(i.e. normal speed and fleeing speed).</p>
+</li>
+<li>
+<p>PlayerHunter Context
+This context also extends the Animal Context and adds several properties like player last seen time and bored timeout.</p>
+</li>
+</ul>
+<p><strong>Locomotion</strong><br>
+There will only be one behavior that is based on the Animal Context. It will be called &quot;Locomotion&quot; that both predator and prey will utilize to move around. It is very simple it simply checks to see if it has arrived at it's current target. If not it moves closer to it by a speed that has been given to the context.<br>
+<img src="locomotionbehavior.png" alt="Locomotion Behavior"></p>
+<p><strong>Prey Target Scanner</strong><br>
+The Prey Context will have two behaviors that depend on it's information. The first one is called PreyTargetScanner which is the most simple behavior possible. It is separated from other behaviors to demonstrate the fact that it is possible to run processes at different rates on the same gameobject. Therefore when doing an expensive action like scanning your environment you can set this to happen at a lower interval than some more necessary task.
+<img src="preytargetscanner.png" alt="Prey Target Scanner"></p>
+<p><strong>Prey Target Updater</strong><br>
+The second behavior that is tied to the Prey Context is called PreyTargetUpdater. It's job is to make the prey wander around the map unless the player gets too close at which point it should flee away from the player.
+<img src="preytargetupdater.png" alt="Prey Target Updater"></p>
+<p><strong>Hunter Scanner</strong><br>
+The PlayerHunterContext will also have two behaviors tied to it. The first one is called Hunter Scanner which does essentially the same thing as the Prey Target Updater but is used a little differently to maintain the last seen property that the hunter holds. This behavior purposely uses two transitions from a single state to demonstrate using priority. If you examine this double transition you will be able to see that the most important factor in the transition is if the hunter can currently see the player. Using the given priorities the following behavior emerges. If the hunter can see the player no matter what it will always update the current target of the hunter to be the player. If the player isn't seen but has been found it will skip to idle. If the player isn't seen and hasn't been found then it will scan the environment for the player.
+<img src="hunterscanner.png" alt="Hunter Scanner"></p>
+<p><strong>Hunter Chase</strong><br>
+This behavior is responsible for driving the predator when the player has been spotted. It will go to the last place the player has been seen. If it looses sight of the player it will keep moving towards the last place it saw the player until the time since the player was last seen is larger than the boredTimeout value. At which point it will return to the place it was spawned.
+<img src="hunterchase.png" alt="Hunter Chase"></p>
+<p>These five behaviors are all you need to achieve the desired AI behavior.</p>
+<h4 id="bot-eater-steps">Bot-Eater Steps</h4>
+<ol>
+<li>Import EasyState.</li>
+<li>Navigate to the folder <code>Assets/EasyState/Demos/</code>.</li>
+<li>Double click on the Bot-Eater Unity Package and import all of it.</li>
+<li>Open the EasyState Editor Window.  <img src="openwindow.png" alt="Open Editor Window"></li>
+<li>Name the behavior &quot;Locomotion&quot; and choose &quot;Animal&quot; as the context.</li>
+<li>Then Create three nodes named &quot;Entry&quot;,&quot;Idle&quot;,&quot;Move&quot;.</li>
+<li>Set both &quot;Idle&quot; and &quot;Move&quot; states as leaf states.</li>
+<li>Make a transition from &quot;Entry&quot; state to &quot;Idle&quot; state.</li>
+<li>Set the condition of the <code>Decision</code> node to <code>HasReachedTarget</code>.</li>
+<li>Set the false state of that <code>Decision</code> node to the &quot;Move&quot; state.</li>
+<li>On the &quot;Move&quot; state add the action called <code>MoveTowardsTarget</code>.</li>
+<li>Click the green &quot;Save&quot; button at the top right of the EasyState editor.</li>
+<li>Next click the &quot;Menu&quot; dropdown at the top left of the EasyState Editor and click the red &quot;New Behavior&quot; button.</li>
+<li>Name this behavior &quot;PreyTargetScanner&quot;.</li>
+<li>Change the context from &quot;Animal&quot; to &quot;PreyContext&quot;</li>
+<li>Add two nodes named &quot;Entry&quot; and &quot;Scan&quot;.</li>
+<li>Set the &quot;Scan&quot; state as a leaf state.</li>
+<li>Add the action named <code>ScanForPredators</code> to the &quot;Scan&quot; state.</li>
+<li>Select the &quot;Entry&quot; state and make an unconditional transition to the &quot;Scan&quot; state.</li>
+<li>Save the behavior.</li>
+<li>Next create a new behavior named &quot;PreyTargetUpdater&quot;.</li>
+<li>Add the following states &quot;Entry&quot;,&quot;Run Away&quot;,&quot;Wander&quot;,&quot;Idle&quot;,&quot;UpdateTarget&quot;.</li>
+<li>On the &quot;Run Away&quot; state set it as a leaf node and add the <code>RunAway</code> action.</li>
+<li>On the &quot;Wander&quot; state add the <code>ResetSpeed</code> action.</li>
+<li>Switch Context back to Animal.</li>
+<li>On the &quot;UpdateTarget&quot; state add the <code>PickRandomTarget</code> action and set that state as a leaf state.</li>
+<li>Create a transition from the &quot;Wander&quot; state to the &quot;Update Target&quot; state.</li>
+<li>Set the condition of that node to <code>HasReachedTarget</code>.</li>
+<li>Set the false state of that <code>Decision</code> to the &quot;Idle&quot; state.</li>
+<li>Switch Context back to PreyContext.</li>
+<li>Set the &quot;Idle&quot; state as a leaf state.</li>
+<li>Next create a transition from &quot;Entry&quot; state to the &quot;Run Away&quot; state.</li>
+<li>Set the condition of that node to <code>CanSeePredator</code>.</li>
+<li>Set the false state of that <code>Decision</code> node to the &quot;Wander&quot; state.</li>
+<li>Save that behavior.</li>
+<li>Create a new behavior named &quot;HunterScanner&quot;  with context set to <code>PlayerHunter</code>.</li>
+<li>Add the following states named &quot;Entry&quot;,&quot;Scan&quot;,&quot;UpdateTarget&quot;,&quot;Exit&quot;.</li>
+<li>Set all the states except &quot;Entry&quot; as leaf states.</li>
+<li>Add a transition from &quot;Entry&quot; to &quot;Exit&quot; state.</li>
+<li>Set the condition of that transition to <code>HasFoundPlayer</code>.</li>
+<li>Set the false state of the transition to &quot;Scan&quot; state.</li>
+<li>Set the true priority of the transition to 3 and the false priority to 2.</li>
+<li>Add a transition from &quot;Entry&quot; to &quot;UpdateTarget&quot; state.</li>
+<li>Set the false state of this transition to the &quot;Exit&quot; state.</li>
+<li>Set the condition of this transition to <code>CanSeePlayer</code>.</li>
+<li>Set the true priority of this transition to 1 and the false priority to 4.</li>
+<li>Add the <code>ScanForPlayer</code> action to the &quot;Scan&quot; state.</li>
+<li>Add the <code>TargetPlayer</code> action to the &quot;UpdateTarget&quot; state.</li>
+<li>Save behavior.</li>
+<li>Create a new behavior named &quot;HunterChase&quot;.</li>
+<li>Add states named &quot;Entry&quot;,&quot;Leave&quot;,&quot;Chase&quot;,&quot;Idle&quot;,and &quot;TargetPlayer&quot;.</li>
+<li>Set &quot;Leave&quot;,&quot;Idle&quot;,and &quot;TargetPlayer&quot; as leaf states.</li>
+<li>Create a transition between &quot;Entry&quot; and &quot;Leave&quot;.</li>
+<li>Set the condition of that transition to be <code>IsBored</code>.</li>
+<li>Set the false state of that transition to &quot;Chase&quot;.</li>
+<li>Create a transition from &quot;Chase&quot; to &quot;TargetPlayer&quot;.</li>
+<li>Set the condition of that transition to <code>CanSeePlayer</code>.</li>
+<li>Set the false state of that transition to &quot;Idle&quot;.</li>
+<li>Switch Context back to Animal.</li>
+<li>Add the <code>GoToSpawnPoint</code> action to the &quot;Leave&quot; state.</li>
+<li>Switch Context back to player hunter.</li>
+<li>Add the <code>TargetPlayer</code> action to the &quot;UpdateTarget&quot; state.</li>
+<li>Save Behavior.</li>
+<li>Open the Bot-Eater Scene.</li>
+<li>Switch to the Scene View window in Unity and select the PlayerHunter prefab.</li>
+<li>Under the PlayerHunterStateMachine component set the machine count to 3 and add the behaviors named <code>Locomotion</code>,<code>HunterScanner</code>, and <code>HunterChase</code></li>
+<li>Change the refresh mode for the <code>HunterScanner</code> machine to be <code>CustomRate</code> with a refresh rate of 0.5.</li>
+<li>Click the &quot;Open Context&quot; button and set the values as you like(good starting values : Speed : 15, Perception Radius : 15, Bored Timeout 2)</li>
+<li>Select the Prey prefab.</li>
+<li>Under the PreyStateMachine component set the machine count to 3.</li>
+<li>Add the behaviors named <code>Locomotion</code>, <code>PreyTargetUpdater</code>,<code>PreyScanner</code>.</li>
+<li>Change the refresh mode for <code>PreyTargetUpdater</code> and <code>PreyScanner</code> to be <code>CustomRate</code> with a refresh rate of 0.5;</li>
+<li>Click the &quot;Open Context&quot; button and set the values as you see fit.(good starting values : Wander Radius : 20, Perception Radius : 5, Fleeing Speed : 15, Normal Speed : 11).</li>
+<li>Play the game!</li>
+</ol>
+<hr>
+<h4 id="troubleshooting-and-tips">Troubleshooting and Tips</h4>
+<ul>
+<li>The current settings for the prey prefabs has their awareness being updated every half a second. You can play around with different combinations of perception radius and refresh rates to achieve different levels of prey awareness.</li>
+<li>If you get an error when entering play mode double check your behaviors and make sure all the nodes are connected and are valid. Which can been seen by checking the status at the bottom of each node.</li>
+<li>If the AI isn't acting as you expect first double check the screenshots provided at the beginning of this section to assure that the behavior is correctly design. After that assert the context values have been given sensible values.</li>
+</ul>
+<hr>
+<h4 id="bot-eater-included-code">Bot-Eater Included Code</h4>
+<h5 id="general-scripts">General Scripts</h5>
+<p><strong>Game Restarter.cs</strong><br>
+When active this script listens for the key 'R' to be pressed at which point the level is reloaded.<br>
+<strong>Game Starter.cs</strong><br>
+When active this listens for the space key to be pressed at which point it sets the time scale to one.<br>
+<strong>Player Controller.cs</strong><br>
+This controls all the simple functionality that is required for the player to operate.
+<strong>Simple Follow.cs</strong><br>
+This is used on the main camera to make it follow the player around the level.</p>
+<h5 id="bot-eater-actions">Bot-Eater Actions</h5>
+<p><strong>Go to Spawn Point.cs</strong><br>
+This is used by the animal context and it is used to set the current target to be equal to wherever the spawn point is.<br>
+<strong>Move Towards Target.cs</strong><br>
+This simply moves the stored transform a fixed distance towards the current target which is dictated by the current speed property.<br>
+<strong>Pick Random Target.cs</strong><br>
+This will pick a random point inside a circle that is dictated by the wander radius value. It will then set the current target to be that given point.<br>
+<strong>Scan for Player.cs</strong><br>
+A primitive sphere cast that determines if the player is in range. The radius of the sphere cast is set by the perception range.<br>
+<strong>Target Player.cs</strong><br>
+This updates the current target to be the point where the player was spotted. It also updates the last seen time.<br>
+<strong>Reset Speed.cs</strong><br>
+This is used to set the speed at which the prey is moving back to its normal speed. After it feels like it has safely escaped a player.<br>
+<strong>Run Away.cs</strong>
+This is a simple script that sets the current target to be a target 4 meters away in the opposite direction of the player. It also sets the current speed to be equal to the fleeing speed.<br>
+<strong>Scan for Predators</strong><br>
+Like Scan for Player this to uses a sphere cast with a range dictated by the value of its perception radius looking for the player.</p>
+<h5 id="bot-eater-conditions">Bot-Eater Conditions</h5>
+<p><strong>Has Reached Target.cs</strong><br>
+Returns whether or not the player is currently at its current target.</p>
+<p><strong>Can See Player.cs</strong><br>
+Uses a raycast and height of the player's position to decide if the player can be seen.</p>
+<p><strong>Has Found Player.cs</strong><br>
+This is used so if the hunter has found the player it will stop using sphere casts to look for it.</p>
+<p><strong>Is Bored.cs</strong><br>
+This is used to determine whether or not the hunter should give up chasing the player.</p>
+<p><strong>Can See Predator.cs</strong><br>
+Prey in this game have the potential to be able to sense more than one predator at a time. Therefore they use a list to store those references. This merely checks to see if there is anything in that list.</p>
+
+</body>
+</html>
