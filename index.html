@@ -1,392 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Documentation.md</title>
+<title>Easy State Documentation</title>
+<link href="styles/main.css" rel="stylesheet" type="text/css">
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-
-<style>
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
-body {
-	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
-	font-size: 14px;
-	padding: 0 12px;
-	line-height: 22px;
-	word-wrap: break-word;
-}
-
-#code-csp-warning {
-	position: fixed;
-	top: 0;
-	right: 0;
-	color: white;
-	margin: 16px;
-	text-align: center;
-	font-size: 12px;
-	font-family: sans-serif;
-	background-color:#444444;
-	cursor: pointer;
-	padding: 6px;
-	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
-}
-
-#code-csp-warning:hover {
-	text-decoration: none;
-	background-color:#007acc;
-	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
-}
-
-
-body.scrollBeyondLastLine {
-	margin-bottom: calc(100vh - 22px);
-}
-
-body.showEditorSelection .code-line {
-	position: relative;
-}
-
-body.showEditorSelection .code-active-line:before,
-body.showEditorSelection .code-line:hover:before {
-	content: "";
-	display: block;
-	position: absolute;
-	top: 0;
-	left: -12px;
-	height: 100%;
-}
-
-body.showEditorSelection li.code-active-line:before,
-body.showEditorSelection li.code-line:hover:before {
-	left: -30px;
-}
-
-.vscode-light.showEditorSelection .code-active-line:before {
-	border-left: 3px solid rgba(0, 0, 0, 0.15);
-}
-
-.vscode-light.showEditorSelection .code-line:hover:before {
-	border-left: 3px solid rgba(0, 0, 0, 0.40);
-}
-
-.vscode-dark.showEditorSelection .code-active-line:before {
-	border-left: 3px solid rgba(255, 255, 255, 0.4);
-}
-
-.vscode-dark.showEditorSelection .code-line:hover:before {
-	border-left: 3px solid rgba(255, 255, 255, 0.60);
-}
-
-.vscode-high-contrast.showEditorSelection .code-active-line:before {
-	border-left: 3px solid rgba(255, 160, 0, 0.7);
-}
-
-.vscode-high-contrast.showEditorSelection .code-line:hover:before {
-	border-left: 3px solid rgba(255, 160, 0, 1);
-}
-
-img {
-	max-width: 100%;
-	max-height: 100%;
-}
-
-a {
-	color: #4080D0;
-	text-decoration: none;
-}
-
-a:focus,
-input:focus,
-select:focus,
-textarea:focus {
-	outline: 1px solid -webkit-focus-ring-color;
-	outline-offset: -1px;
-}
-
-hr {
-	border: 0;
-	height: 2px;
-	border-bottom: 2px solid;
-}
-
-h1 {
-	padding-bottom: 0.3em;
-	line-height: 1.2;
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
-}
-
-h1, h2, h3 {
-	font-weight: normal;
-}
-
-h1 code,
-h2 code,
-h3 code,
-h4 code,
-h5 code,
-h6 code {
-	font-size: inherit;
-	line-height: auto;
-}
-
-a:hover {
-	color: #4080D0;
-	text-decoration: underline;
-}
-
-table {
-	border-collapse: collapse;
-}
-
-table > thead > tr > th {
-	text-align: left;
-	border-bottom: 1px solid;
-}
-
-table > thead > tr > th,
-table > thead > tr > td,
-table > tbody > tr > th,
-table > tbody > tr > td {
-	padding: 5px 10px;
-}
-
-table > tbody > tr + tr > td {
-	border-top: 1px solid;
-}
-
-blockquote {
-	margin: 0 7px 0 5px;
-	padding: 0 16px 0 10px;
-	border-left: 5px solid;
-}
-
-code {
-	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
-	font-size: 14px;
-	line-height: 19px;
-}
-
-body.wordWrap pre {
-	white-space: pre-wrap;
-}
-
-.mac code {
-	font-size: 12px;
-	line-height: 18px;
-}
-
-pre:not(.hljs),
-pre.hljs code > div {
-	padding: 16px;
-	border-radius: 3px;
-	overflow: auto;
-}
-
-/** Theming */
-
-.vscode-light,
-.vscode-light pre code {
-	color: rgb(30, 30, 30);
-}
-
-.vscode-dark,
-.vscode-dark pre code {
-	color: #DDD;
-}
-
-.vscode-high-contrast,
-.vscode-high-contrast pre code {
-	color: white;
-}
-
-.vscode-light code {
-	color: #A31515;
-}
-
-.vscode-dark code {
-	color: #D7BA7D;
-}
-
-.vscode-light pre:not(.hljs),
-.vscode-light code > div {
-	background-color: rgba(220, 220, 220, 0.4);
-}
-
-.vscode-dark pre:not(.hljs),
-.vscode-dark code > div {
-	background-color: rgba(10, 10, 10, 0.4);
-}
-
-.vscode-high-contrast pre:not(.hljs),
-.vscode-high-contrast code > div {
-	background-color: rgb(0, 0, 0);
-}
-
-.vscode-high-contrast h1 {
-	border-color: rgb(0, 0, 0);
-}
-
-.vscode-light table > thead > tr > th {
-	border-color: rgba(0, 0, 0, 0.69);
-}
-
-.vscode-dark table > thead > tr > th {
-	border-color: rgba(255, 255, 255, 0.69);
-}
-
-.vscode-light h1,
-.vscode-light hr,
-.vscode-light table > tbody > tr + tr > td {
-	border-color: rgba(0, 0, 0, 0.18);
-}
-
-.vscode-dark h1,
-.vscode-dark hr,
-.vscode-dark table > tbody > tr + tr > td {
-	border-color: rgba(255, 255, 255, 0.18);
-}
-
-.vscode-light blockquote,
-.vscode-dark blockquote {
-	background: rgba(127, 127, 127, 0.1);
-	border-color: rgba(0, 122, 204, 0.5);
-}
-
-.vscode-high-contrast blockquote {
-	background: transparent;
-	border-color: #fff;
-}
-</style>
-
-<style>
-/* Tomorrow Theme */
-/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
-/* Original theme - https://github.com/chriskempson/tomorrow-theme */
-
-/* Tomorrow Comment */
-.hljs-comment,
-.hljs-quote {
-	color: #8e908c;
-}
-
-/* Tomorrow Red */
-.hljs-variable,
-.hljs-template-variable,
-.hljs-tag,
-.hljs-name,
-.hljs-selector-id,
-.hljs-selector-class,
-.hljs-regexp,
-.hljs-deletion {
-	color: #c82829;
-}
-
-/* Tomorrow Orange */
-.hljs-number,
-.hljs-built_in,
-.hljs-builtin-name,
-.hljs-literal,
-.hljs-type,
-.hljs-params,
-.hljs-meta,
-.hljs-link {
-	color: #f5871f;
-}
-
-/* Tomorrow Yellow */
-.hljs-attribute {
-	color: #eab700;
-}
-
-/* Tomorrow Green */
-.hljs-string,
-.hljs-symbol,
-.hljs-bullet,
-.hljs-addition {
-	color: #718c00;
-}
-
-/* Tomorrow Blue */
-.hljs-title,
-.hljs-section {
-	color: #4271ae;
-}
-
-/* Tomorrow Purple */
-.hljs-keyword,
-.hljs-selector-tag {
-	color: #8959a8;
-}
-
-.hljs {
-	display: block;
-	overflow-x: auto;
-	color: #4d4d4c;
-	padding: 0.5em;
-}
-
-.hljs-emphasis {
-	font-style: italic;
-}
-
-.hljs-strong {
-	font-weight: bold;
-}
-</style>
-
-<style>
-/*
- * Markdown PDF CSS
- */
-
- body {
-	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
-}
-
-pre {
-	background-color: #f8f8f8;
-	border: 1px solid #cccccc;
-	border-radius: 3px;
-	overflow-x: auto;
-	white-space: pre-wrap;
-	overflow-wrap: break-word;
-}
-
-pre:not(.hljs) {
-	padding: 23px;
-	line-height: 19px;
-}
-
-blockquote {
-	background: rgba(127, 127, 127, 0.1);
-	border-color: rgba(0, 122, 204, 0.5);
-}
-
-.emoji {
-	height: 1.4em;
-}
-
-/* for inline code */
-:not(pre):not(.hljs) > code {
-	color: #C9AE75; /* Change the old color so it seems less like an error */
-	font-size: inherit;
-}
-
-/* Page Break : use <div class="page"/> to insert page break
--------------------------------------------------------- */
-.page {
-	page-break-after: always;
-}
-
-</style>
 
 </head>
 <body>
+<p><img class="title-image" src="images/easystateicon.png" alt="Easy State Icon"></p>
 <h1 id="welcome-to-easy-state">Welcome to Easy State</h1>
-<p><img src="easystateicon.png" alt="Easy State Icon"></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
@@ -498,14 +120,14 @@ A <code>State</code> must have the following :</p>
 <p>Note : In order to add nodes to a behavior a context must be selected.</p>
 </blockquote>
 <p>All nodes share the following functionality:<br>
-<img src="nodediagram.png" alt="Node Diagram"></p>
+<img src="images/nodediagram.png" alt="Node Diagram"></p>
 <h4 id="entry-node">Entry Node</h4>
 <hr>
-<p><img src="entrynode_alone.png" alt="Entry Node"><br>
+<p><img src="images/entrynode_alone.png" alt="Entry Node"><br>
 This node only has one property which is to set its name. By convention the name is set to &quot;Entry&quot;, but it can be anything you want. Any leaf nodes will transition back to this state after execution. This will also always be the first state that gets executed on a given behavior and therefore cannot be deleted.</p>
 <h4 id="state-nodes">State Nodes</h4>
 <hr>
-<p><img src="statenode.png" alt="State Node"></p>
+<p><img src="images/statenode.png" alt="State Node"></p>
 <ul>
 <li>
 <p><strong>State Name</strong>
@@ -526,7 +148,7 @@ If this is set to true it will signal the StateMachine to yield a frame after ex
 </ul>
 <h4 id="decision-nodes">Decision Nodes</h4>
 <hr>
-<p><img src="decisionnode.png" alt="Decision Node"><br>
+<p><img src="images/decisionnode.png" alt="Decision Node"><br>
 This is the standard transition node. The black line is always tied to the source state. The green line is tied to the state that will be chosen if the condition evaluates as true. The red line is tied to the state that will be chosen if the condition evaluates as false.</p>
 <ul>
 <li>
@@ -544,12 +166,12 @@ If the condition returns false this choice will be given this priority. In the c
 </ul>
 <h4 id="unconditional-nodes">Unconditional Nodes</h4>
 <hr>
-<p><img src="unconditionalnode.png" alt="Unconditional Node"><br>
+<p><img src="images/unconditionalnode.png" alt="Unconditional Node"><br>
 This is the simplest of all nodes. It has two lines where black represents source state and green represents destination state. Using this node always chooses the connected destination state as the next state. If you use this transition you are not allowed to have any other transitions from that source state.</p>
 <hr>
 <h3 id="12-context-wizard">1.2 Context Wizard</h3>
 <hr>
-<p><img src="contextwizard.png" alt="Context Wizard Editor"></p>
+<p><img src="images/contextwizard.png" alt="Context Wizard Editor"></p>
 <p>The Context Wizard is used to make the Actions, Conditions, and Contexts. Actions and Conditions  require a Context. A Context holds the data that Conditions need to evaluate and the data Actions need to 'act' on.</p>
 <h4 id="options">Options</h4>
 <p>There are a few configurable options in the wizard that mostly have to do with where the files that are being created are being saved. The default folder structure is explained in the <a href="#22-EasyState-Database">EasyState Database Section</a>. The only other option lets you decide if you want to use default namespaces or not. By default each file that you create is associated with a context and it uses a unique namespace to encapsulate classes that belong to that namespace. By default the name of the namespace is &quot;(ContextName)FSM&quot;.</p>
@@ -558,7 +180,7 @@ This is the simplest of all nodes. It has two lines where black represents sourc
 </blockquote>
 <h4 id="context-creator">Context Creator</h4>
 <p>This is the tab that should be used to create a context. You can name your context whatever you like. By convention the name should end in 'Context' but that is not a requirement. You can click the &quot;Add Property&quot; if you know that your particular context is going to require certain properties. You will need to provide the <code>Type</code> (i.e. int,string, etc) and the property name. If you know that a property in your context is going to need to depend on a value given to it by the associated state machine check the &quot;Tie to property&quot; box. For example lets say that you wanted to store a variable of type <code>Transform</code> named &quot;EnemyTransform&quot;. Well if you enabled the &quot;Tie to property&quot; option it will create a public property name &quot;EnemyTransform&quot;. It will then set the property to be equal to the &quot;EnemyTransform&quot; variable stored in the context. Therefore giving you a way to set context properties at runtime or in the inspector. Of course more values can be added to the context after creation this is merely meant to be a time saving option. When you have named your context and added the desired properties you might notice a info box that tells you what files you will create when you create a new context.<br>
-<img src="contextCreator.png" alt="Info Box"><br>
+<img src="images/contextCreator.png" alt="Info Box"><br>
 Each time you create a context EasyState generates six files that help keep things statically typed. The following types are created :</p>
 <ul>
 <li>Custom Context script and asset</li>
@@ -575,7 +197,7 @@ Each time you create a context EasyState generates six files that help keep thin
 <hr>
 <h3 id="state-machine">State Machine</h3>
 <hr>
-<p><img src="samplestatemachine.png" alt="Sample State Machine"></p>
+<p><img src="images/samplestatemachine.png" alt="Sample State Machine"></p>
 <p>This is an example state machine that was created when you completed the first tutorial. It is linked with a context named &quot;FirstContext&quot;. For each context that a user creates a custom state machine type is created. This is the component that you place on the <code>GameObject</code> you are trying to control. This component acts as a container for all machines you wish to have running on the object it is attached to. Although a <code>StateMachine</code> can have multiple machines running at the same time it was designed so that each machine is referencing the same <code>Context</code>. If that is not the behavior you desire you can add a second <code>StateMachine</code> component which will reference a unique context. By default the <code>StateMachine</code> will start updating all the machines it is running on  Awake, but if you wish to start them manually you can un-tick that option. Also by default we use instance data of the context instead of the original source. When this box is checked it will clone the context it was given and use the clone for the duration of its life cycle. If this is not the desired behavior just un-check this option. Clicking open context will simply display an inspector for the context that is tied to the state machine. Giving an easy way to jump between machine and context and alter variables on the fly.</p>
 <p>Each custom <code>StateMachine</code> has three methods of note:</p>
 <ul>
@@ -655,7 +277,7 @@ This stops the updater.</li>
 <blockquote>
 <p>Deleting the root database folder is an effective way to reset your database.</p>
 </blockquote>
-<p><img src="folderstructure.png" alt="Folder Tree"></p>
+<p><img src="images/folderstructure.png" alt="Folder Tree"></p>
 <p>When your project compiles EasyState creates a variety of folders to store generated scripts and assets. The main folder has four sub-folders within it. They are as follows:</p>
 <ul>
 <li>
@@ -684,56 +306,56 @@ This folder holds all the necessary files for keeping track of the editors state
 <ol>
 <li>
 <p>Open Context Wizard.
-<img src="opencontextwizard.png" alt="Open Context Wizard"></p>
+<img src="images/opencontextwizard.png" alt="Open Context Wizard"></p>
 </li>
 <li>
 <p>Create a context named &quot;FirstContext&quot;.<br>
-<img src="firstcontextcreation.png" alt="Create First Context"></p>
+<img src="images/firstcontextcreation.png" alt="Create First Context"></p>
 </li>
 <li>
 <p>Set Action context to 'FirstContext' and create Action Named &quot;HelloAction&quot;. Injecting the following logic :<br>
 <code>Debug.Log(&quot;Hello!!&quot;);</code><br>
-<img src="helloactioncreation.png" alt="Create Hello Action"></p>
+<img src="images/helloactioncreation.png" alt="Create Hello Action"></p>
 </li>
 <li>
 <p>Set Action context to 'FirstContext' and create an 'Action' named &quot;GoodbyeAction&quot;. Injecting the following logic :<br>
 <code>Debug.Log(&quot;Goodbye!!&quot;);</code><br>
-<img src="goodbyeactioncreation.png" alt="Create Goodbye Action"></p>
+<img src="images/goodbyeactioncreation.png" alt="Create Goodbye Action"></p>
 </li>
 <li>
 <p>Set Condition context to 'FirstContext' and create a 'Condition' named &quot;RandomChoice&quot;.Injecting the following logic :<br>
 <code>return Random.Range(0.0f,1.0f)&gt; 0.5f;</code><br>
-<img src="randomchoicecreation.png" alt="Create Random Choice"></p>
+<img src="images/randomchoicecreation.png" alt="Create Random Choice"></p>
 </li>
 <li>
 <p>Open the Easy State Editor.<br>
-<img src="openwindow.png" alt="Open Editor Window"></p>
+<img src="images/openwindow.png" alt="Open Editor Window"></p>
 </li>
 <li>
 <p>Name Behavior &quot;First Behavior&quot; and set context to 'FirstContext'.<br>
-<img src="firstbehaviorname.png" alt="Name Behavior"></p>
+<img src="images/firstbehaviorname.png" alt="Name Behavior"></p>
 </li>
 <li>
 <p>Add the first node.<br>
-<img src="addentry.png" alt="Entry Node"></p>
+<img src="images/addentry.png" alt="Entry Node"></p>
 </li>
 <li>
 <p>Add second node and name it &quot;Hello&quot;.</p>
 </li>
 <li>
 <p>Add third node and name it &quot;Goodbye&quot;.
-<img src="addtwonodes.png" alt="Three nodes in editor"></p>
+<img src="images/addtwonodes.png" alt="Three nodes in editor"></p>
 </li>
 <li>
 <p>Select Entry node and right click on it. Select make transition and then click on the Hello World State node.
-<img src="adddecision.png" alt="Three nodes + decision node in editor"></p>
+<img src="images/adddecision.png" alt="Three nodes + decision node in editor"></p>
 </li>
 <li>
 <p>Select the decision. Right click and set false state to the Goodbye World State node.</p>
 </li>
 <li>
 <p>Set the condition of the decision node to the &quot;Random Choice&quot; condition.
-<img src="connectdecision.png" alt="node editor"></p>
+<img src="images/connectdecision.png" alt="node editor"></p>
 </li>
 <li>
 <p>Set the &quot;Leaf State&quot; checkbox to true on both Hello World and Goodbye World States.</p>
@@ -743,7 +365,7 @@ This folder holds all the necessary files for keeping track of the editors state
 </li>
 <li>
 <p>Click the &quot;Add New Action&quot; button on the Goodbye State and pick the &quot;GoodbyeAction&quot; as the action.
-<img src="myfirstbehavior.png" alt="completed my first behavior"></p>
+<img src="images/myfirstbehavior.png" alt="completed my first behavior"></p>
 </li>
 <li>
 <p>Click the &quot;Save&quot; button under the menu foldout. You should see the message &quot;Behavior Saved.&quot;.</p>
@@ -756,11 +378,11 @@ This folder holds all the necessary files for keeping track of the editors state
 </li>
 <li>
 <p>Expand <code>Element0</code> under the machines foldout. Set the <code>Behavior</code> property of that element to the behavior we just created.
-<img src="firststatemachine.png" alt="First State Machine Component"></p>
+<img src="images/firststatemachine.png" alt="First State Machine Component"></p>
 </li>
 <li>
 <p>Click 'Play' in Unity.You should start receiving alternating messages in the console.
-<img src="firstbehavior_running.png" alt="First behavior running in Unity"></p>
+<img src="images/firstbehavior_running.png" alt="First behavior running in Unity"></p>
 </li>
 </ol>
 <hr>
@@ -799,26 +421,26 @@ This context also extends the Animal Context and adds several properties like pl
 </ul>
 <p><strong>Locomotion</strong><br>
 There will only be one behavior that is based on the Animal Context. It will be called &quot;Locomotion&quot; that both predator and prey will utilize to move around. It is very simple it simply checks to see if it has arrived at it's current target. If not it moves closer to it by a speed that has been given to the context.<br>
-<img src="locomotionbehavior.png" alt="Locomotion Behavior"></p>
+<img src="images/locomotionbehavior.png" alt="Locomotion Behavior"></p>
 <p><strong>Prey Target Scanner</strong><br>
 The Prey Context will have two behaviors that depend on it's information. The first one is called PreyTargetScanner which is the most simple behavior possible. It is separated from other behaviors to demonstrate the fact that it is possible to run processes at different rates on the same gameobject. Therefore when doing an expensive action like scanning your environment you can set this to happen at a lower interval than some more necessary task.
-<img src="preytargetscanner.png" alt="Prey Target Scanner"></p>
+<img src="images/preytargetscanner.png" alt="Prey Target Scanner"></p>
 <p><strong>Prey Target Updater</strong><br>
 The second behavior that is tied to the Prey Context is called PreyTargetUpdater. It's job is to make the prey wander around the map unless the player gets too close at which point it should flee away from the player.
-<img src="preytargetupdater.png" alt="Prey Target Updater"></p>
+<img src="images/preytargetupdater.png" alt="Prey Target Updater"></p>
 <p><strong>Hunter Scanner</strong><br>
 The PlayerHunterContext will also have two behaviors tied to it. The first one is called Hunter Scanner which does essentially the same thing as the Prey Target Updater but is used a little differently to maintain the last seen property that the hunter holds. This behavior purposely uses two transitions from a single state to demonstrate using priority. If you examine this double transition you will be able to see that the most important factor in the transition is if the hunter can currently see the player. Using the given priorities the following behavior emerges. If the hunter can see the player no matter what it will always update the current target of the hunter to be the player. If the player isn't seen but has been found it will skip to idle. If the player isn't seen and hasn't been found then it will scan the environment for the player.
-<img src="hunterscanner.png" alt="Hunter Scanner"></p>
+<img src="images/hunterscanner.png" alt="Hunter Scanner"></p>
 <p><strong>Hunter Chase</strong><br>
 This behavior is responsible for driving the predator when the player has been spotted. It will go to the last place the player has been seen. If it looses sight of the player it will keep moving towards the last place it saw the player until the time since the player was last seen is larger than the boredTimeout value. At which point it will return to the place it was spawned.
-<img src="hunterchase.png" alt="Hunter Chase"></p>
+<img src="images/hunterchase.png" alt="Hunter Chase"></p>
 <p>These five behaviors are all you need to achieve the desired AI behavior.</p>
 <h4 id="bot-eater-steps">Bot-Eater Steps</h4>
 <ol>
 <li>Import EasyState.</li>
 <li>Navigate to the folder <code>Assets/EasyState/Demos/</code>.</li>
 <li>Double click on the Bot-Eater Unity Package and import all of it.</li>
-<li>Open the EasyState Editor Window.  <img src="openwindow.png" alt="Open Editor Window"></li>
+<li>Open the EasyState Editor Window.  <img src="images/openwindow.png" alt="Open Editor Window"></li>
 <li>Name the behavior &quot;Locomotion&quot; and choose &quot;Animal&quot; as the context.</li>
 <li>Then Create three nodes named &quot;Entry&quot;,&quot;Idle&quot;,&quot;Move&quot;.</li>
 <li>Set both &quot;Idle&quot; and &quot;Move&quot; states as leaf states.</li>
