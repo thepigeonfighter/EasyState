@@ -356,8 +356,12 @@ blockquote {
 
 /* for inline code */
 :not(pre):not(.hljs) > code {
-	color: #C9AE75; /* Change the old color so it seems less like an error */
+	color: rgb(49, 50, 66); /* Change the old color so it seems less like an error */
+	background-color: rgba(127, 127, 127, 0.1);
+	border-radius: 3px;
+	padding: 1px 4px;
 	font-size: inherit;
+	font-family: 'Courier New', Courier, monospace;
 }
 
 /* Page Break : use <div class="page"/> to insert page break
@@ -377,4 +381,13 @@ img{
     width: 50%;
     display: block;
     margin: 0 auto;    
+}
+h1{
+	padding: 3% 0;
+}
+h2{
+	padding: 2% 0;
+}
+h3, h4, h5, h6{
+	padding: 1% 0;
 }
