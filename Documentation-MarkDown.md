@@ -100,19 +100,25 @@ A general term that refers to any representation of a state in the Designer. The
 
 -------
 
+![Utility Node](images/ExecutorNode.png)
+
+- **Executor Node(Blue)**
+  Executor nodes can have many actions and zero or one transitions away from it. When an Executor node is entered each action in its list of actions will execute if the action's condition is met.
+
+-------
 `Connection`
 Connects two states and most of the time will have a `Condition` or `Evaluator` connected to them. There are four kinds of connections in Easy State.
 
 ![Unconditional](images/Unconditional.png)
 
-- **Unconditional(Green w/Arrow)**
+- **Unconditional**
 The simplest of all connections it will always transition to their destination node no matter what.
 
 -------
 
 ![Default Connection](images/DefaultConnection.png)
 
-- **Default Connection(True Destination:Green,False Destination:Red w/Disk)**
+- **Default Connection(True Destination:Green,False Destination:Red)**
 Default connections have a true destination and a false destination. If there are more than one default connections on a node then the connections will be given an implicit priority which is based on their position from top to bottom. So the connection that is at the top of the list will be evaluated first.
 
 -------

@@ -466,17 +466,23 @@ Repeater nodes can have <code>Actions</code> and must have at least one <code>Co
 Utility nodes do not have any <code>Actions</code>. They must have one or more <code>Evaluators</code>. When an Utility node is entered all of the evaluators are evaluated(redundancy FTW) the behavior then transitions to the node that is connected to the evaluator with the highest score.</li>
 </ul>
 <hr>
+<p><img src="images/ExecutorNode.png" alt="Utility Node"></p>
+<ul>
+<li><strong>Executor Node(Blue)</strong>
+Executor nodes can have many actions and zero or one transitions away from it. When an Executor node is entered each action in its list of actions will execute if the action's condition is met.</li>
+</ul>
+<hr>
 <p><code>Connection</code>
 Connects two states and most of the time will have a <code>Condition</code> or <code>Evaluator</code> connected to them. There are four kinds of connections in Easy State.</p>
 <p><img src="images/Unconditional.png" alt="Unconditional"></p>
 <ul>
-<li><strong>Unconditional(Green w/Arrow)</strong>
+<li><strong>Unconditional</strong>
 The simplest of all connections it will always transition to their destination node no matter what.</li>
 </ul>
 <hr>
 <p><img src="images/DefaultConnection.png" alt="Default Connection"></p>
 <ul>
-<li><strong>Default Connection(True Destination:Green,False Destination:Red w/Disk)</strong>
+<li><strong>Default Connection(True Destination:Green,False Destination:Red)</strong>
 Default connections have a true destination and a false destination. If there are more than one default connections on a node then the connections will be given an implicit priority which is based on their position from top to bottom. So the connection that is at the top of the list will be evaluated first.</li>
 </ul>
 <hr>
@@ -619,11 +625,13 @@ When you check the option &quot;Use Individual Event Handlers&quot; under the op
 <p>In this tutorial will make the most basic state machine possible. A state machine that alternates between two states and logs messages to the console. This should help complete the above explanation of work flow.</p>
 <h4 id="steps">Steps</h4>
 <ul>
-<li>Open the Context Wizard Window(Window/EasyState/Context Wizard). This will dock if possible next to your inspector tab.</li>
-<li>Create a data type. You can name it whatever you want. I will name mine &quot;FirstDataType&quot;.</li>
-</ul>
+<li>
+<p>Open the Context Wizard Window(Window/EasyState/Context Wizard). This will dock if possible next to your inspector tab.</p>
+</li>
+<li>
+<p>Create a data type. You can name it whatever you want. I will name mine &quot;FirstDataType&quot;.</p>
 <p><img src="images/fiveMinDataType.png" alt="First Data Type"></p>
-<ul>
+</li>
 <li>
 <p>Select &quot;FirstDataType&quot; (or whatever name you gave your data type) and create one action called &quot;Hello&quot; and inject the line of code <code>Debug.Log(&quot;Hello!!&quot;);</code> into the injected code foldout.</p>
 <p><img src="images/helloAction.png" alt="Hello Action"></p>
