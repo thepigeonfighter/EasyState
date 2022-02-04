@@ -448,6 +448,13 @@ code {
 <li><a href="#31-settings">3.1 Settings</a></li>
 <li><a href="#32-data">3.2 Data</a></li>
 <li><a href="#33-easy-state-v3-vs-easy-state-v2">3.3 Easy State v3 vs Easy State v2</a></li>
+<li><a href="#34-faq">3.4 FAQ</a>
+<ul>
+<li><a href="#why-is-there-a-newtonsoft-dependency">Why is there a Newtonsoft dependency?</a></li>
+<li><a href="#how-should-i-work-with-easy-state-machine-data">How should I work with Easy State Machine data?</a></li>
+<li><a href="#how-should-i-use-the-single-event-handler">How should I use the Single Event Handler?</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#4-tutorials">4. Tutorials</a>
@@ -456,9 +463,14 @@ code {
 <li><a href="#create-your-first-state-machine">Create Your First State Machine</a>
 <ul>
 <li><a href="#steps">Steps</a></li>
-<li><a href="#where-to-go-from-here">Where to Go from Here</a></li>
 </ul>
 </li>
+<li><a href="#patrol-tutorial">Patrol Tutorial</a>
+<ul>
+<li><a href="#steps-1">Steps</a></li>
+</ul>
+</li>
+<li><a href="#where-to-go-from-here">Where to Go from Here</a></li>
 </ul>
 </li>
 </ul>
@@ -472,13 +484,28 @@ code {
 <h3 id="core-components">Core Components</h3>
 <p><img src="images/DataTypeStructure.png" alt="Data Type"></p>
 <h4 id="datatype"><code>DataType</code></h4>
-<p>In essence a data type is just a data container. Think of it like a blue print for your state machine. The way Easy State is designed each state machine is strongly typed by the <code>DataType</code> you create. If that doesn't make sense right now don't worry, it will later.</p>
+<p>In essence a data type is just a data container. Think of it like a blue print for your state machine. The way Easy State is designed each state machine is strongly typed by the <code>DataType</code> you create. If that doesn't make sense right now don't worry, it will later. All data types inherit from <code>DataTypeBase</code>. <code>DataTypeBase</code> comes with a couple fields that are of interest.</p>
+<ul>
+<li>DataGrabBag
+A generic data container used for passing raw data into and out of the state machine.</li>
+<li>FSM_GameObject
+GameObject that this state machine is attached to.</li>
+<li>FSM_Transform
+Transform that this state machine is attached to.</li>
+</ul>
+<blockquote>
+<p>Data Type support inheritance. Meaning that actions/conditions/evaluators that you define on a base class will be available for sub classes.</p>
+</blockquote>
+<p>When you create a data type the will be an additional field added to the template of type <code>DataTypeFunctionSet</code> this field can be renamed and is used to define Actions,Conditions and Evaluators in line instead of in a separate file. More on this later.</p>
 <h4 id="action"><code>Action</code></h4>
 <p>This defines what your state machine does. If your state machine needs to increment a score or tick a timer it should be done inside of an <code>Action</code>.</p>
 <h4 id="condition"><code>Condition</code></h4>
 <p>Conditions dictate the flow of your state machine. They are boolean and therefore always evaluate as true or false.</p>
 <h4 id="evaluator"><code>Evaluator</code></h4>
 <p>Evaluators are used when you would rather score a transition instead of returning a simple true or false. This can be useful when trying to decide between more than two possibilities.</p>
+<blockquote>
+<p>Note: DataTypes, Actions, Conditions, and Evaluators that are file based can be renamed. Their <code>EasyStateScript</code> attributes must not be altered. Inline components can also be renamed, but any references that exist to those components inside a design will be lost.</p>
+</blockquote>
 <hr>
 <h3 id="designer-terms">Designer Terms</h3>
 <hr>
@@ -751,6 +778,13 @@ This event is called when an <a href="#update-cycle">update cycle</a> for a stat
 <li>Debugger can debug state machines in play mode</li>
 <li>Format how data is displayed in the debugger</li>
 </ul>
+<h3 id="34-faq">3.4 FAQ</h3>
+<h4 id="why-is-there-a-newtonsoft-dependency">Why is there a Newtonsoft dependency?</h4>
+<p>Easy State depends on Newtonsoft for serialization. This DLL can be found under EasyState/Plugins. As of Unity 2020, Unity started including Newtonsoft by default as it was a dependency of one of their default packages. So Unity 2020 and up this plugin is not required and can be deleted unless you end up removing some default packages. In which case go to the DLL and remove the UNITY_2019 define. This will allow it to compile in newer Unity versions.</p>
+<h4 id="how-should-i-work-with-easy-state-machine-data">How should I work with Easy State Machine data?</h4>
+<p>Easy State Machine Data all inherit from <code>DataTypeBase</code> which inherits from <code>UnityEngine.ScriptableObject</code> as such, serialization of this data is trivial. You should use your data type to contain all the state for the state machine. I.E. your components (Actions,Conditions, etc) should not contain any state. Your conditions should read the state of your data, and your actions should mutate that state. You should use the <code>OnInitialize</code> event on the EasyStateMachineComponent to initialize your data type's state.</p>
+<h4 id="how-should-i-use-the-single-event-handler">How should I use the Single Event Handler?</h4>
+<p>Event Handlers should be used to react to changes in your state machine and apply these changes to your Unity Scene(i.e. trigger animations, destroy gameObjects etc). As of version 3.1, EventHandlers are now easy to use on a 1:1 or a 1:Many relationship to state machines. One thing to keep in mind with EventHandlers is that the EasyStateMachine component has a field named 'Event Handler'. This expects an object of type <code>EventHandler&lt;T&gt;</code>. Since Unity doesn't handle generics very well you must first add your event handler to a gameObject first and then use that gameObject as a reference for the 'Event Handler' field. Otherwise the connection will not work.</p>
 <hr>
 <h2 id="4-tutorials">4. Tutorials</h2>
 <hr>
@@ -857,7 +891,95 @@ As mentioned in the <a href="#11-creating-core-components">1.1 Creating Core Com
 <li>Check the console! You should be getting messages!</li>
 </ol>
 <p><img src="images/fdt-console.png" alt="First Data type component"></p>
-<h4 id="where-to-go-from-here">Where to Go from Here</h4>
+<h3 id="patrol-tutorial">Patrol Tutorial</h3>
+<p>Let's set up a simple scene with an agent that patrols through a set of waypoints. If you haven't done the 'First State Machine' tutorial yet it is recommended that you do that first to get a little more familiar with the interface. This demo can be found completed under EasyState/Samples/Patrol</p>
+<h4 id="steps">Steps</h4>
+<ol>
+<li>
+<p>Set up a scene in Unity with a floor, some obstacles, and a cylinder to represent an agent.
+<img src="images/patrol-setup.png" alt="Set up"></p>
+</li>
+<li>
+<p>Add a series of way points for your agent to traverse, for example:
+<img src="images/patrol-waypoints.png" alt="Waypoints"></p>
+</li>
+<li>
+<p>Create a DataType called <code>PatrolData</code> with the following fields:</p>
+</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> Transform[] Waypoints;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> Speed;
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> _currentIndex;
+</div></code></pre>
+<ol start="4">
+<li>Define a condition to check to see if we have reached a waypoint:</li>
+</ol>
+<pre class="hljs"><code><div>
+   PatrolData_Set.AddCondition(data =&gt; Vector3.Distance(data.FSM_Transform.position, data.Waypoints[data._currentIndex].position) &lt; <span class="hljs-number">.1</span>f, <span class="hljs-string">"Has Reached Target"</span>);
+</div></code></pre>
+<ol start="5">
+<li>Define an action to move the agent towards the current waypoint:</li>
+</ol>
+<pre class="hljs"><code><div>
+   PatrolData_Set.AddAction(data =&gt;
+        {
+            <span class="hljs-keyword">var</span> nextMove = Vector3.MoveTowards(data.FSM_Transform.position,data.Waypoints[data._currentIndex].position, data.Speed * Time.deltaTime);
+            FSM_Transform.position = nextMove;
+            FSM_Transform.LookAt(data.Waypoints[data._currentIndex]);
+        }
+</div></code></pre>
+<ol start="6">
+<li>Define an action to increment the current way point:</li>
+</ol>
+<pre class="hljs"><code><div>PatrolData_Set.AddAction(data =&gt; data._currentIndex = (_currentIndex + <span class="hljs-number">1</span>) % data.Waypoints.Length, <span class="hljs-string">"Pick Next Point"</span>);
+</div></code></pre>
+<ol start="7">
+<li>Create a new Design with the <code>PatrolData</code> data type named 'Patrol'.</li>
+<li>Add a Repeater Node and a State node to the design. Then connect them like the picture below:</li>
+</ol>
+<p><img src="images/patrol-design.png" alt="Design"></p>
+<ol start="9">
+<li>Double click on the connection handle between 'Move' and 'Pick New Point' and select 'Has Reached Target' is true.</li>
+</ol>
+<p><img src="images/patrol-connection.png" alt="Connection"></p>
+<ol start="10">
+<li>Double click on the 'Move' node and add the 'Move Towards Target' action to the node.</li>
+<li>Double click on the 'Pick New Point' node and add the 'Pick Next Point' action to the node.</li>
+<li>Under Pick Next Point's setting foldout set the Cycle type to 'Yield Seconds' and set the Exit Delay value to something reasonable</li>
+</ol>
+<p><img src="images/patrol-node-settings.png" alt="Node Settings"></p>
+<ol start="13">
+<li>Hit Ctrl+S to save the design and make sure you see a confirmation in the bottom right of the screen that says the design and behavior were saved.</li>
+</ol>
+<p><img src="images/patrol-design-saved.png" alt="Save Design"></p>
+<ol start="14">
+<li>In the Unity Scene add a <code>PatrolDataStateMachine</code> component to your agent, click the 'Create New'  button on the data type field and add a reference to the newly created asset.</li>
+</ol>
+<p><img src="images/patrol-new-data-asset.png" alt="New Data Type asset"></p>
+<ol start="15">
+<li>Set the speed variable to something reasonable.</li>
+<li>Under the settings foldout set the Update Rate to 'Update'</li>
+<li>Open the <code>PatrolDataStateMachine</code> script and add the following method:</li>
+</ol>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnStateMachineInitialized</span>(<span class="hljs-params">EasyStateMachine stateMachine</span>)</span>
+    {
+        <span class="hljs-keyword">var</span> data  = stateMachine.GetDataInstance() <span class="hljs-keyword">as</span> PatrolData;
+
+        <span class="hljs-keyword">var</span> transformsParent = GameObject.Find(<span class="hljs-string">"Waypoints"</span>);
+        <span class="hljs-comment">//skip the parent transform</span>
+        <span class="hljs-keyword">var</span> transforms = transformsParent.GetComponentsInChildren&lt;Transform&gt;().Skip(<span class="hljs-number">1</span>).ToArray();
+        <span class="hljs-comment">//set the Waypoints field</span>
+        data.Waypoints = transforms;
+    }
+</div></code></pre>
+<ol start="18">
+<li>Under the Events foldout on the <code>PatrolDataStateMachine</code> component hook the method you just created to the OnInitialize event.</li>
+</ol>
+<p><img src="images/patrol-event.png" alt="State Machine event"></p>
+<ol start="19">
+<li>Click play and your agent should be moving along the set of waypoints you created!</li>
+</ol>
+<h3 id="where-to-go-from-here">Where to Go from Here</h3>
 <p>Congratulations on your first operating state machine. From here you can fiddle around with various settings like refresh type. Maybe use the event handler to respond to different points in the <a href="#update-cycle">update cycle</a>. In the Samples folder there is a Unity package that can be imported into a fresh project. This sample includes this state machine you just made as well as several others showcasing various aspects of Easy State functionality.There will be some video tutorials posted on <a href="https://www.youtube.com/channel/UCqpzOtqr6FiJ6LOBzW5sJSQ">YouTube</a> where you can find a video version of the above tutorial and more.</p>
 <blockquote>
 <p>Note: Video tutorials will refer to this as EasyState v3. The other tutorials are for older versions of Easy State. They may be helpful to fill in the gaps as the interface and workflow has changed but the core concepts are the same.</p>
