@@ -380,6 +380,7 @@ code {
 <ul>
 <li><a href="#datatype"><code>DataType</code></a></li>
 <li><a href="#action"><code>Action</code></a></li>
+<li><a href="#parameterized-action"><code>Parameterized Action</code></a></li>
 <li><a href="#condition"><code>Condition</code></a></li>
 <li><a href="#evaluator"><code>Evaluator</code></a></li>
 </ul>
@@ -415,6 +416,7 @@ code {
 <li><a href="#node-description-foldout">Node Description Foldout</a></li>
 <li><a href="#actions-foldout">Actions Foldout</a></li>
 <li><a href="#connections-foldout">Connections Foldout</a></li>
+<li><a href="#summary-foldout">Summary Foldout</a></li>
 </ul>
 </li>
 <li><a href="#connections">Connections</a></li>
@@ -453,6 +455,13 @@ code {
 <li><a href="#why-is-there-a-newtonsoft-dependency">Why is there a Newtonsoft dependency?</a></li>
 <li><a href="#how-should-i-work-with-easy-state-machine-data">How should I work with Easy State Machine data?</a></li>
 <li><a href="#how-should-i-use-the-single-event-handler">How should I use the Single Event Handler?</a></li>
+<li><a href="#how-can-i-get-a-reference-to-the-state-machines-data-instance-in-unity">How can I get a reference to the state machine's data instance in Unity?</a></li>
+</ul>
+</li>
+<li><a href="#35-built-in-components">3.5 Built In Components</a>
+<ul>
+<li><a href="#always-true-condition">Always True Condition</a></li>
+<li><a href="#log-message-action">Log Message Action</a></li>
 </ul>
 </li>
 </ul>
@@ -499,6 +508,8 @@ Transform that this state machine is attached to.</li>
 <p>When you create a data type the will be an additional field added to the template of type <code>DataTypeFunctionSet</code> this field can be renamed and is used to define Actions,Conditions and Evaluators in line instead of in a separate file. More on this later.</p>
 <h4 id="action"><code>Action</code></h4>
 <p>This defines what your state machine does. If your state machine needs to increment a score or tick a timer it should be done inside of an <code>Action</code>.</p>
+<h4 id="parameterized-action"><code>Parameterized Action</code></h4>
+<p>Parameterized Actions inherit from <code>Action</code>. They add the ability to pass a primitive argument straight from the design to an action. In order to use them create a 'Parameterized Action' from the Asset Menu. Then replace the placeholder 'TParameterType' with your desired parameter type. Currently supports int, float, string, and boolean parameter types.</p>
 <h4 id="condition"><code>Condition</code></h4>
 <p>Conditions dictate the flow of your state machine. They are boolean and therefore always evaluate as true or false.</p>
 <h4 id="evaluator"><code>Evaluator</code></h4>
@@ -543,8 +554,8 @@ This is a ScriptableObject instance of your data type. This is used by the Easy 
 <li>{Data Type Name}StateMachine.cs
 This is the State Machine component you will use to utilize any designs you create that use this data type. It is a Unity component and can be added to gameObjects.</li>
 </ul>
-<p>Once created the new Data Type will be added to the Easy State Assets menu list. In the image above we have created a Data Type called 'DataType1'.
-You will notice this menu allows you to also create Actions, Conditions, and Evaluators. If created at the root level it will create a template script that will not compile until you manually set the Data Type that the component uses. If instead you navigate to your created Data Type menu item you can create components that automatically utilize your created data type.</p>
+<p>Once created the new Data Type will be added to the Easy State Assets menu list. In the image above we have created a Data Type called <code>TestData</code>.
+You will notice this menu allows you to create Actions, Parameterized Actions, Conditions, and Evaluators for particular Data Types.</p>
 <p><img src="images/create-new-action.png" alt="Create New Data Type"></p>
 <blockquote>
 <p>Note: Easy State scans Unity's Assemblies for newly added core components. As such you can rename or delete generated scripts as you please but you should not edit the <code>[EasyStateScript]</code> attribute, as this is how the framework keeps track of which components have been added/moved/or deleted. Additionally be aware that deleting components can invalidate designs and thereby delete their associated behaviors that may be being used by Easy State Machine components in your Unity Scene.</p>
@@ -580,7 +591,7 @@ Evaluators can be added by using the <code>AddEvaluator</code> method. This meth
 <p><img src="images/designLocation.png" alt="Designer Tab"></p>
 <p>The window can be found under the 'Window/EasyState/Editor' tab at the top of Unity.The window is a draggable/dockable and behaves in the same way as other Unity windows like 'Scene' and 'Game' work.</p>
 <h4 id="controls">Controls</h4>
-<p><em>Pan</em> : Ctrl + Left Mouse
+<p><em>Pan</em> : Ctrl + Left Mouse or Middle Mouse Button
 <em>Zoom</em>: Mouse wheel
 <em>Select</em>: Left Mouse
 <em>Multi-Select</em> Left Click Background + Drag OR Ctrl + Left Click
@@ -658,6 +669,8 @@ This is like Yield Seconds but allows you to bind the delay amount to a float va
 <p>A list of all actions that will be executed in this node. Display will change based on the Action Execution Type in the settings foldout.</p>
 <h5 id="connections-foldout">Connections Foldout</h5>
 <p>A list of exit connections for the selected node. You can add/remove and set the destinations of the connections from this foldout.</p>
+<h5 id="summary-foldout">Summary Foldout</h5>
+<p>Use the summary foldout to describe what a particular node is doing in your own words as an alternative to creating a Note node. This note will also be visible on the node itself if you expand the node's foldout.</p>
 <h4 id="connections">Connections</h4>
 <p>Double click on the triangle handle of a connection to open up its details panel.</p>
 <p><img src="images/connection-details.png" alt="Connection Details"></p>
@@ -785,6 +798,16 @@ This event is called when an <a href="#update-cycle">update cycle</a> for a stat
 <p>Easy State Machine Data all inherit from <code>DataTypeBase</code> which inherits from <code>UnityEngine.ScriptableObject</code> as such, serialization of this data is trivial. You should use your data type to contain all the state for the state machine. I.E. your components (Actions,Conditions, etc) should not contain any state. Your conditions should read the state of your data, and your actions should mutate that state. You should use the <code>OnInitialize</code> event on the EasyStateMachineComponent to initialize your data type's state.</p>
 <h4 id="how-should-i-use-the-single-event-handler">How should I use the Single Event Handler?</h4>
 <p>Event Handlers should be used to react to changes in your state machine and apply these changes to your Unity Scene(i.e. trigger animations, destroy gameObjects etc). As of version 3.1, EventHandlers are now easy to use on a 1:1 or a 1:Many relationship to state machines. One thing to keep in mind with EventHandlers is that the EasyStateMachine component has a field named 'Event Handler'. This expects an object of type <code>EventHandler&lt;T&gt;</code>. Since Unity doesn't handle generics very well you must first add your event handler to a gameObject first and then use that gameObject as a reference for the 'Event Handler' field. Otherwise the connection will not work.</p>
+<h4 id="how-can-i-get-a-reference-to-the-state-machines-data-instance-in-unity">How can I get a reference to the state machine's data instance in Unity?</h4>
+<p>Simply get a reference to the state machine and call the <code>GetDataInstance</code> method. Please note that this will return the object as <code>DataTypeBase</code> so you will need to cast it to whatever data type you are using.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> stateMachine = GetComponent&lt;EasyStateMachine&gt;();
+EasyState.Models.DataTypeBase data = stateMachine.GetDataInstance();
+</div></code></pre>
+<h3 id="35-built-in-components">3.5 Built In Components</h3>
+<h4 id="always-true-condition">Always True Condition</h4>
+<p>This is a <code>Condition</code> that can be used by all designs, it always returns true and is the default condition used by new connections.</p>
+<h4 id="log-message-action">Log Message Action</h4>
+<p>This is an parameterized <code>Action</code> that can be used by all designs and is useful for logging debug messages as you are testing out your designs.</p>
 <hr>
 <h2 id="4-tutorials">4. Tutorials</h2>
 <hr>
