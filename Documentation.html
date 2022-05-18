@@ -511,7 +511,7 @@ Transform that this state machine is attached to.</li>
 <h4 id="action"><code>Action</code></h4>
 <p>This defines what your state machine does. If your state machine needs to increment a score or tick a timer it should be done inside of an <code>Action</code>.</p>
 <h4 id="parameterized-action"><code>Parameterized Action</code></h4>
-<p>Parameterized Actions inherit from <code>Action</code>. They add the ability to pass a primitive argument straight from the design to an action. In order to use them create a 'Parameterized Action' from the Asset Menu. Then replace the placeholder 'TParameterType' with your desired parameter type. Currently supports int, float, string, and boolean parameter types.</p>
+<p>Parameterized Actions inherit from <code>Action</code>. They add the ability to pass a primitive argument straight from the design to an action. In order to use them create a 'Parameterized Action' from the Asset Menu. Then replace the placeholder 'TParameterType' with your desired parameter type. Currently supports int, float, string, enum, and boolean parameter types.</p>
 <h4 id="condition"><code>Condition</code></h4>
 <p>Conditions dictate the flow of your state machine. They are boolean and therefore always evaluate as true or false.</p>
 <h4 id="evaluator"><code>Evaluator</code></h4>
@@ -817,7 +817,7 @@ This event is called when an <a href="#update-cycle">update cycle</a> for a stat
 </ul>
 <h3 id="34-faq">3.4 FAQ</h3>
 <h4 id="newtonsoft-not-found">Newtonsoft not found?</h4>
-<p>In older versions of Unity Newtonsoft was not included by default. If you are getting errors about Newtonsoft not be found go to:</p>
+<p>In some Unity project templates Newtonsoft is not included by default. If you are getting errors about Newtonsoft not being found go to:</p>
 <p>&quot;Assets/EasyState/Newtonsoft/Runtime/Newtonsoft.Json.dll&quot;</p>
 <p>Check &quot;Include/Editor&quot; option and apply changes.</p>
 <p>then go to:</p>

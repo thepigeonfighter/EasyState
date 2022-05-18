@@ -108,7 +108,7 @@ This defines what your state machine does. If your state machine needs to increm
 
 #### `Parameterized Action`
 
-Parameterized Actions inherit from `Action`. They add the ability to pass a primitive argument straight from the design to an action. In order to use them create a 'Parameterized Action' from the Asset Menu. Then replace the placeholder 'TParameterType' with your desired parameter type. Currently supports int, float, string, and boolean parameter types.
+Parameterized Actions inherit from `Action`. They add the ability to pass a primitive argument straight from the design to an action. In order to use them create a 'Parameterized Action' from the Asset Menu. Then replace the placeholder 'TParameterType' with your desired parameter type. Currently supports int, float, string, enum, and boolean parameter types.
 
 #### `Condition`
 
@@ -497,7 +497,7 @@ Easy State version 3 is incompatible with version 2. But the concepts translate.
 
 #### Newtonsoft not found?
 
-In older versions of Unity Newtonsoft was not included by default. If you are getting errors about Newtonsoft not be found go to:
+In some Unity project templates Newtonsoft is not included by default. If you are getting errors about Newtonsoft not being found go to:
 
 "Assets/EasyState/Newtonsoft/Runtime/Newtonsoft.Json.dll"
 
