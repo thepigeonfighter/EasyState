@@ -403,7 +403,6 @@ code {
 <li><a href="#create-components-via-asset-menu">Create Components via Asset Menu</a></li>
 <li><a href="#create-components-inside-data-data-type">Create Components Inside Data Data Type</a></li>
 <li><a href="#inheritance">Inheritance</a></li>
-<li><a href="#how-to-create-components-from-scratch">How to Create Components from Scratch</a></li>
 <li><a href="#tips">Tips</a></li>
 </ul>
 </li>
@@ -453,11 +452,11 @@ code {
 <li><a href="#33-easy-state-v3-vs-easy-state-v2">3.3 Easy State v3 vs Easy State v2</a></li>
 <li><a href="#34-faq">3.4 FAQ</a>
 <ul>
-<li><a href="#newtonsoft-not-found">Newtonsoft not found?</a></li>
-<li><a href="#unexpected-datatype-function-behavior">Unexpected DataType function behavior?</a></li>
+<li><a href="#why-is-there-a-newtonsoft-dependency">Why is there a Newtonsoft dependency?</a></li>
 <li><a href="#how-should-i-work-with-easy-state-machine-data">How should I work with Easy State Machine data?</a></li>
 <li><a href="#how-should-i-use-the-single-event-handler">How should I use the Single Event Handler?</a></li>
 <li><a href="#how-can-i-get-a-reference-to-the-state-machines-data-instance-in-unity">How can I get a reference to the state machine's data instance in Unity?</a></li>
+<li><a href="#il2cpp">IL2CPP</a></li>
 </ul>
 </li>
 <li><a href="#35-built-in-components">3.5 Built In Components</a>
@@ -511,7 +510,7 @@ Transform that this state machine is attached to.</li>
 <h4 id="action"><code>Action</code></h4>
 <p>This defines what your state machine does. If your state machine needs to increment a score or tick a timer it should be done inside of an <code>Action</code>.</p>
 <h4 id="parameterized-action"><code>Parameterized Action</code></h4>
-<p>Parameterized Actions inherit from <code>Action</code>. They add the ability to pass a primitive argument straight from the design to an action. In order to use them create a 'Parameterized Action' from the Asset Menu. Then replace the placeholder 'TParameterType' with your desired parameter type. Currently supports int, float, string, enum, and boolean parameter types.</p>
+<p>Parameterized Actions inherit from <code>Action</code>. They add the ability to pass a primitive argument straight from the design to an action. In order to use them create a 'Parameterized Action' from the Asset Menu. Then replace the placeholder 'TParameterType' with your desired parameter type. Currently supports int, float, string, and boolean parameter types.</p>
 <h4 id="condition"><code>Condition</code></h4>
 <p>Conditions dictate the flow of your state machine. They are boolean and therefore always evaluate as true or false.</p>
 <h4 id="evaluator"><code>Evaluator</code></h4>
@@ -537,7 +536,7 @@ Rely on <code>Condition</code> types as defined in the above core component sect
 Rely on <code>Evaluator</code> types as defined in the above core component section. Each connection returns a score. The connection with the highest score is selected to be traversed.</li>
 </ul>
 <h4 id="update-cycle"><code>Update Cycle</code></h4>
-<p>Refers to when a state machine is told to update. Typically the first time a state machine is told to update it will start by updating the entry node(first node of the design) and continuing to update nodes until it updates a node that has a cycle type that is not <code>Pass Through</code>(<a href="#node-settings-foldout">more on this</a>) or a node that is a leaf node. Leaf nodes automatically loop back to the entry node after being updated.</p>
+<p>Refers to when a state machine is told to update. Typically the first time a state machine is told to update it will start by updating the entry node(first node of the design) and continuing to update nodes until it updates a node that has a cycle type that is not <code>Pass Through</code>(<a href="#node-settings-foldout">more on this</a>) or a node that is a leaf node. Leaf nodes automatically loop back to the entry node after being updated. A full graphical representation is located in the same folder as the documentation.</p>
 <hr>
 <h2 id="1-editing">1. Editing</h2>
 <hr>
@@ -581,28 +580,6 @@ Evaluators can be added by using the <code>AddEvaluator</code> method. This meth
 <p><img src="images/add-evaluator.png" alt="Add conditional function to data type with fluent API"></p>
 <h4 id="inheritance">Inheritance</h4>
 <p>Inheritance is supported! This means that if you inherit from a Data type that you created, all the actions, conditions, and evaluators will be able to be used from the parent data type in the designer.</p>
-<h4 id="how-to-create-components-from-scratch">How to Create Components from Scratch</h4>
-<p>The first few steps are identical for all Easy State components.</p>
-<ol>
-<li>
-<p>Create a C# script in Unity(Create/C# Script) and delete the placeholder methods.</p>
-</li>
-<li>
-<p>Add a <code>using EasyState.Models</code></p>
-</li>
-<li>
-<p>Add the attribute:<code>[EasyStateScript(&quot;some-unique-string-value&quot;)]</code> to the class.</p>
-</li>
-<li>
-<p>Update the class's subtype:</p>
-<ul>
-<li>Data Types inherit from <code>DataTypeBase</code></li>
-<li>Actions inherit from <code>Action&lt;YourDataType&gt;</code></li>
-<li>Conditions inherit from <code>Condition&lt;YourDataType</code></li>
-<li>Evaluators inherit from <code>Evaluator&lt;YourDataType&gt;</code></li>
-</ul>
-</li>
-</ol>
 <h4 id="tips">Tips</h4>
 <ul>
 <li>If you want to add or change default using statements in any of these templates, their text files can be found at Assets/EasyState/Editor/Templates</li>
@@ -816,20 +793,8 @@ This event is called when an <a href="#update-cycle">update cycle</a> for a stat
 <li>Format how data is displayed in the debugger</li>
 </ul>
 <h3 id="34-faq">3.4 FAQ</h3>
-<h4 id="newtonsoft-not-found">Newtonsoft not found?</h4>
-<p>In some Unity project templates Newtonsoft is not included by default. If you are getting errors about Newtonsoft not being found go to:</p>
-<p>&quot;Assets/EasyState/Newtonsoft/Runtime/Newtonsoft.Json.dll&quot;</p>
-<p>Check &quot;Include/Editor&quot; option and apply changes.</p>
-<p>then go to:</p>
-<p>&quot;Assets/EasyState/Newtonsoft/Runtime/AOT/Newtonsoft.Json.dll&quot;</p>
-<p>Check whatever build platform your game is using.</p>
-<h4 id="unexpected-datatype-function-behavior">Unexpected DataType function behavior?</h4>
-<p>Datatype function require captured variables in lambda's to work. Here is an example of the <em>wrong</em> way to declare a function.</p>
-<pre class="hljs"><code><div>TestDataType_Set.AddAction(data =&gt; _stateEntered = Time.time, <span class="hljs-string">"Enter State "</span>);
-</div></code></pre>
-<p>Notice how this function is not using the captured variable? It should instead be initialized like this:</p>
-<pre class="hljs"><code><div>TestDataType_Set.AddAction(data =&gt; data._stateEntered = Time.time, <span class="hljs-string">"Enter State "</span>);
-</div></code></pre>
+<h4 id="why-is-there-a-newtonsoft-dependency">Why is there a Newtonsoft dependency?</h4>
+<p>Easy State depends on Newtonsoft for serialization. This DLL can be found under EasyState/Plugins. As of Unity 2020, Unity started including Newtonsoft by default as it was a dependency of one of their default packages. So Unity 2020 and up this plugin is not required and can be deleted unless you end up removing some default packages. In which case go to the DLL and remove the UNITY_2019 define. This will allow it to compile in newer Unity versions.</p>
 <h4 id="how-should-i-work-with-easy-state-machine-data">How should I work with Easy State Machine data?</h4>
 <p>Easy State Machine Data all inherit from <code>DataTypeBase</code> which inherits from <code>UnityEngine.ScriptableObject</code> as such, serialization of this data is trivial. You should use your data type to contain all the state for the state machine. I.E. your components (Actions,Conditions, etc) should not contain any state. Your conditions should read the state of your data, and your actions should mutate that state. You should use the <code>OnInitialize</code> event on the EasyStateMachineComponent to initialize your data type's state.</p>
 <h4 id="how-should-i-use-the-single-event-handler">How should I use the Single Event Handler?</h4>
@@ -839,6 +804,11 @@ This event is called when an <a href="#update-cycle">update cycle</a> for a stat
 <pre class="hljs"><code><div><span class="hljs-keyword">var</span> stateMachine = GetComponent&lt;EasyStateMachine&gt;();
 EasyState.Models.DataTypeBase data = stateMachine.GetDataInstance();
 </div></code></pre>
+<h4 id="il2cpp">IL2CPP</h4>
+<p>Easy state uses some dynamic LINQ expression building. This is not supported when using IL2CPP. As a work around you can switch out the GetGetFieldDelegate method contents in EasyState\Data\ReflectionHelper.cs with the following line of code:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">return</span> x=&gt; (TValue)fieldInfo.GetValue(x);
+</div></code></pre>
+<p>The consequences of this is that you will lose performance on certain data reads. The overall consequences should be fairly small, but if it causes an issue feel free to contact support.</p>
 <h3 id="35-built-in-components">3.5 Built In Components</h3>
 <h4 id="always-true-condition">Always True Condition</h4>
 <p>This is a <code>Condition</code> that can be used by all designs, it always returns true and is the default condition used by new connections.</p>

@@ -27,7 +27,6 @@
       - [Create Components via Asset Menu](#create-components-via-asset-menu)
       - [Create Components Inside Data Data Type](#create-components-inside-data-data-type)
       - [Inheritance](#inheritance)
-      - [How to Create Components from Scratch](#how-to-create-components-from-scratch)
       - [Tips](#tips)
     - [1.2 Designer](#12-designer)
       - [Controls](#controls)
@@ -56,11 +55,11 @@
     - [3.2 Data](#32-data)
     - [3.3 Easy State v3 vs Easy State v2](#33-easy-state-v3-vs-easy-state-v2)
     - [3.4 FAQ](#34-faq)
-      - [Newtonsoft not found?](#newtonsoft-not-found)
-      - [Unexpected DataType function behavior?](#unexpected-datatype-function-behavior)
+      - [Why is there a Newtonsoft dependency?](#why-is-there-a-newtonsoft-dependency)
       - [How should I work with Easy State Machine data?](#how-should-i-work-with-easy-state-machine-data)
       - [How should I use the Single Event Handler?](#how-should-i-use-the-single-event-handler)
       - [How can I get a reference to the state machine's data instance in Unity?](#how-can-i-get-a-reference-to-the-state-machines-data-instance-in-unity)
+      - [IL2CPP](#il2cpp)
     - [3.5 Built In Components](#35-built-in-components)
       - [Always True Condition](#always-true-condition)
       - [Log Message Action](#log-message-action)
@@ -108,7 +107,7 @@ This defines what your state machine does. If your state machine needs to increm
 
 #### `Parameterized Action`
 
-Parameterized Actions inherit from `Action`. They add the ability to pass a primitive argument straight from the design to an action. In order to use them create a 'Parameterized Action' from the Asset Menu. Then replace the placeholder 'TParameterType' with your desired parameter type. Currently supports int, float, string, enum, and boolean parameter types.
+Parameterized Actions inherit from `Action`. They add the ability to pass a primitive argument straight from the design to an action. In order to use them create a 'Parameterized Action' from the Asset Menu. Then replace the placeholder 'TParameterType' with your desired parameter type. Currently supports int, float, string, and boolean parameter types.
 
 #### `Condition`
 
@@ -149,7 +148,7 @@ Connects two states or nodes together. There are two types of connections.
 
 #### `Update Cycle`
 
-Refers to when a state machine is told to update. Typically the first time a state machine is told to update it will start by updating the entry node(first node of the design) and continuing to update nodes until it updates a node that has a cycle type that is not `Pass Through`([more on this](#node-settings-foldout)) or a node that is a leaf node. Leaf nodes automatically loop back to the entry node after being updated.
+Refers to when a state machine is told to update. Typically the first time a state machine is told to update it will start by updating the entry node(first node of the design) and continuing to update nodes until it updates a node that has a cycle type that is not `Pass Through`([more on this](#node-settings-foldout)) or a node that is a leaf node. Leaf nodes automatically loop back to the entry node after being updated. A full graphical representation is located in the same folder as the documentation.
 
 -------
 
@@ -219,21 +218,6 @@ Evaluators can be added by using the `AddEvaluator` method. This method requires
 #### Inheritance
 
 Inheritance is supported! This means that if you inherit from a Data type that you created, all the actions, conditions, and evaluators will be able to be used from the parent data type in the designer.
-
-#### How to Create Components from Scratch
-
-The first few steps are identical for all Easy State components.
-
-1. Create a C# script in Unity(Create/C# Script) and delete the placeholder methods.
-2. Add a `using EasyState.Models`
-3. Add the attribute:`[EasyStateScript("some-unique-string-value")]` to the class.
-4. Update the class's subtype:
-
-   - Data Types inherit from `DataTypeBase`
-   - Actions inherit from `Action<YourDataType>`
-   - Conditions inherit from `Condition<YourDataType`
-   - Evaluators inherit from `Evaluator<YourDataType>`
-
 
 #### Tips
 
@@ -495,33 +479,9 @@ Easy State version 3 is incompatible with version 2. But the concepts translate.
 
 ### 3.4 FAQ
 
-#### Newtonsoft not found?
+#### Why is there a Newtonsoft dependency?
 
-In some Unity project templates Newtonsoft is not included by default. If you are getting errors about Newtonsoft not being found go to:
-
-"Assets/EasyState/Newtonsoft/Runtime/Newtonsoft.Json.dll"
-
-Check "Include/Editor" option and apply changes.
-
-then go to:
-
-"Assets/EasyState/Newtonsoft/Runtime/AOT/Newtonsoft.Json.dll"
-
-Check whatever build platform your game is using.
-
-#### Unexpected DataType function behavior?
-
-Datatype function require captured variables in lambda's to work. Here is an example of the *wrong* way to declare a function.
-
-~~~C#
-TestDataType_Set.AddAction(data => _stateEntered = Time.time, "Enter State ");
-~~~
-
-Notice how this function is not using the captured variable? It should instead be initialized like this:
-
-~~~C#
-TestDataType_Set.AddAction(data => data._stateEntered = Time.time, "Enter State ");
-~~~
+Easy State depends on Newtonsoft for serialization. This DLL can be found under EasyState/Plugins. As of Unity 2020, Unity started including Newtonsoft by default as it was a dependency of one of their default packages. So Unity 2020 and up this plugin is not required and can be deleted unless you end up removing some default packages. In which case go to the DLL and remove the UNITY_2019 define. This will allow it to compile in newer Unity versions.
 
 #### How should I work with Easy State Machine data?
 
@@ -539,6 +499,16 @@ Simply get a reference to the state machine and call the `GetDataInstance` metho
 var stateMachine = GetComponent<EasyStateMachine>();
 EasyState.Models.DataTypeBase data = stateMachine.GetDataInstance();
 ~~~
+
+#### IL2CPP
+
+Easy state uses some dynamic LINQ expression building. This is not supported when using IL2CPP. As a work around you can switch out the GetGetFieldDelegate method contents in EasyState\Data\ReflectionHelper.cs with the following line of code:
+
+~~~c#
+return x=> (TValue)fieldInfo.GetValue(x);
+~~~
+
+The consequences of this is that you will lose performance on certain data reads. The overall consequences should be fairly small, but if it causes an issue feel free to contact support.
 
 ### 3.5 Built In Components
 
