@@ -41,6 +41,8 @@
       - [Groups](#groups)
       - [Notes](#notes)
       - [Jumper Node](#jumper-node)
+      - [Trigger Node](#trigger-node)
+        - [Update Types](#update-types)
       - [Designs vs Behaviors](#designs-vs-behaviors)
   - [2. In Unity](#2-in-unity)
     - [2.1 Easy State Machine](#21-easy-state-machine)
@@ -63,6 +65,7 @@
     - [3.5 Built In Components](#35-built-in-components)
       - [Always True Condition](#always-true-condition)
       - [Log Message Action](#log-message-action)
+      - [Toggle Trigger Action](#toggle-trigger-action)
   - [4. Tutorials](#4-tutorials)
     - [General Workflow Overview](#general-workflow-overview)
     - [Create Your First State Machine](#create-your-first-state-machine)
@@ -268,7 +271,7 @@ When you right click the background of the designer you are greeted with a conte
 
 ![Context Menu](images/context-menu.png)
 
-The top 4 options are all just different node presets(More on these later). While the bottom two represent different node types completely. If we create a state node and double click on it, it will open the detail panel for the node.
+The top 4 options are all just different node presets(More on these later). While the bottom three represent different node types completely. If we create a state node and double click on it, it will open the detail panel for the node.
 
 ![Node details](images/node-details-panel.png)
 
@@ -350,6 +353,18 @@ Create a group by selecting more than one node or note and either hitting Ctrl+G
 ![Jumper Node](images/jumper.png)
 
 This node allows you to transition from one design to another.
+
+#### Trigger Node
+
+![Trigger Node](images/trigger-node.png)
+
+This node allows you to execute actions when certain conditions are met regardless of the state machine's current state. They are nodes that are not connected to any others. The conditions foldout works in the same way as it does in the [Connection](#connections) details panel. While the Actions foldout works in the same way as it would on a normal [Node Actions Foldout](#actions-foldout). The biggest difference with a trigger is with its update type. It has the following options:
+
+##### Update Types
+
+- Continuous: This means that at every step the trigger will be checked and executed. The user should be somewhat careful though, as there are often times many steps per frame. This may be necessary for very important triggers but comes with performance implications.
+- Interval Cycles: This means that the trigger will be checked and executed once every time the state machine itself is updated.
+- Interval Seconds: This allows the trigger to be updated based on time, it is important to not that this still requires the state machine to be updated, so if the trigger interval is shorter than the state machine's update interval than the trigger won't be updated until the state machine itself is updated.
 
 #### Designs vs Behaviors
 
@@ -519,6 +534,10 @@ This is a `Condition` that can be used by all designs, it always returns true an
 #### Log Message Action
 
 This is an parameterized `Action` that can be used by all designs and is useful for logging debug messages as you are testing out your designs.
+
+#### Toggle Trigger Action
+
+This is a parameterized `Action` that takes in a `ToggleTriggerCommand` as a parameter. It gives the ability to enable and disable triggers inside a behavior.
 
 -------
 

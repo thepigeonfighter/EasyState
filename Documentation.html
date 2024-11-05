@@ -423,6 +423,11 @@ code {
 <li><a href="#groups">Groups</a></li>
 <li><a href="#notes">Notes</a></li>
 <li><a href="#jumper-node">Jumper Node</a></li>
+<li><a href="#trigger-node">Trigger Node</a>
+<ul>
+<li><a href="#update-types">Update Types</a></li>
+</ul>
+</li>
 <li><a href="#designs-vs-behaviors">Designs vs Behaviors</a></li>
 </ul>
 </li>
@@ -463,6 +468,7 @@ code {
 <ul>
 <li><a href="#always-true-condition">Always True Condition</a></li>
 <li><a href="#log-message-action">Log Message Action</a></li>
+<li><a href="#toggle-trigger-action">Toggle Trigger Action</a></li>
 </ul>
 </li>
 </ul>
@@ -614,7 +620,7 @@ Evaluators can be added by using the <code>AddEvaluator</code> method. This meth
 <h4 id="nodes">Nodes</h4>
 <p>When you right click the background of the designer you are greeted with a context menu that has by default six options.</p>
 <p><img src="images/context-menu.png" alt="Context Menu"></p>
-<p>The top 4 options are all just different node presets(More on these later). While the bottom two represent different node types completely. If we create a state node and double click on it, it will open the detail panel for the node.</p>
+<p>The top 4 options are all just different node presets(More on these later). While the bottom three represent different node types completely. If we create a state node and double click on it, it will open the detail panel for the node.</p>
 <p><img src="images/node-details-panel.png" alt="Node details"></p>
 <h5 id="node-settings-foldout">Node Settings Foldout</h5>
 <p>When the settings foldout is expanded you will see that nodes have three dropdowns that greatly alter the behavior of the node.</p>
@@ -684,6 +690,15 @@ This is like Yield Seconds but allows you to bind the delay amount to a float va
 <h4 id="jumper-node">Jumper Node</h4>
 <p><img src="images/jumper.png" alt="Jumper Node"></p>
 <p>This node allows you to transition from one design to another.</p>
+<h4 id="trigger-node">Trigger Node</h4>
+<p><img src="images/trigger-node.png" alt="Trigger Node"></p>
+<p>This node allows you to execute actions when certain conditions are met regardless of the state machine's current state. They are nodes that are not connected to any others. The conditions foldout works in the same way as it does in the <a href="#connections">Connection</a> details panel. While the Actions foldout works in the same way as it would on a normal <a href="#actions-foldout">Node Actions Foldout</a>. The biggest difference with a trigger is with its update type. It has the following options:</p>
+<h5 id="update-types">Update Types</h5>
+<ul>
+<li>Continuous: This means that at every step the trigger will be checked and executed. The user should be somewhat careful though, as there are often times many steps per frame. This may be necessary for very important triggers but comes with performance implications.</li>
+<li>Interval Cycles: This means that the trigger will be checked and executed once every time the state machine itself is updated.</li>
+<li>Interval Seconds: This allows the trigger to be updated based on time, it is important to not that this still requires the state machine to be updated, so if the trigger interval is shorter than the state machine's update interval than the trigger won't be updated until the state machine itself is updated.</li>
+</ul>
 <h4 id="designs-vs-behaviors">Designs vs Behaviors</h4>
 <p>A design is a Behavior in progress. The Unity State Machine components can only use Behaviors. Think of Behaviors as validated designs. When working on a design if it is valid, when you save changes to the design you will get a toast in the bottom right of the screen that indicates that a behavior was created or updated. This is a signal that everything in your design is valid. If you want to find out why your design is invalid either click the hamburger button menu at the right of the toolbar or use the shortcut key Ctrl + V to validate your design and see what is missing.</p>
 <p><img src="images/workflow-save.png" alt="Save Design"></p>
@@ -814,6 +829,8 @@ EasyState.Models.DataTypeBase data = stateMachine.GetDataInstance();
 <p>This is a <code>Condition</code> that can be used by all designs, it always returns true and is the default condition used by new connections.</p>
 <h4 id="log-message-action">Log Message Action</h4>
 <p>This is an parameterized <code>Action</code> that can be used by all designs and is useful for logging debug messages as you are testing out your designs.</p>
+<h4 id="toggle-trigger-action">Toggle Trigger Action</h4>
+<p>This is a parameterized <code>Action</code> that takes in a <code>ToggleTriggerCommand</code> as a parameter. It gives the ability to enable and disable triggers inside a behavior.</p>
 <hr>
 <h2 id="4-tutorials">4. Tutorials</h2>
 <hr>
